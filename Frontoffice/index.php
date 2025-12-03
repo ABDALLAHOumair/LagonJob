@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Page d'acceuil</h1>
     
 </body>
 </html>
