@@ -1,0 +1,115 @@
+
+/* ============ LagonJobs - CSS de base (HTML/CSS uniquement) ============ */
+:root{
+  --lagon:#00A8CC;
+  --lagon-dark:#007EA7;
+  --bg:#F5F9FA;
+  --text:#222222;
+  --text-2:#555555;
+  --success:#4CAF50;
+  --error:#E63946;
+  --card:#ffffff;
+  --shadow:0 6px 18px rgba(0,0,0,.06);
+  --radius:14px;
+  --radius-sm:10px;
+  --space:clamp(14px, 2.8vw, 22px);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.6;
+}
+
+.container{width:min(1100px, 92vw); margin:auto}
+
+a{color:var(--lagon-dark); text-decoration:none}
+a:hover{color:var(--lagon)}
+
+.btn{
+  background:var(--lagon);
+  color:#fff;
+  padding:.7rem 1rem;
+  border-radius:10px;
+  display:inline-block;
+  font-weight:600;
+  border:2px solid var(--lagon);
+  transition:all .2s ease;
+}
+.btn:hover{background:var(--lagon-dark); border-color:var(--lagon-dark); color:#fff}
+.btn-outline{background:transparent; color:var(--lagon-dark)}
+.btn-outline:hover{background:var(--lagon); color:#fff}
+
+.site-header{
+  position:sticky; top:0; z-index:10;
+  background:#fff; box-shadow:var(--shadow);
+}
+.header-inner{display:flex; align-items:center; justify-content:space-between; padding:.8rem 0}
+.logo{font-weight:800; font-size:1.3rem; color:var(--text)}
+.logo span{color:var(--lagon-dark)}
+.logo .wave{margin-right:.35rem}
+.nav{display:flex; gap:.9rem; align-items:center}
+.nav a{font-weight:600}
+.nav .btn, .nav .btn-outline{margin-left:.2rem}
+
+.hero{
+  padding: clamp(40px, 8vw, 80px) 0;
+  background: linear-gradient(180deg, #E8F6FA 0%, rgba(232,246,250,0.4) 100%);
+  border-bottom:1px solid #e7eef1;
+}
+.hero .grid{
+  display:grid; grid-template-columns: 1.1fr .9fr; gap:clamp(18px, 4vw, 36px);
+}
+.hero h1{font-size:clamp(1.8rem, 4vw, 2.6rem); margin:.2rem 0 .5rem 0}
+.hero p{color:var(--text-2); margin:0 0 1.2rem 0}
+.hero .card{
+  background:var(--card); padding:1rem; border-radius:var(--radius); box-shadow:var(--shadow);
+}
+
+.search-inline{display:flex; gap:.5rem; flex-wrap:wrap}
+.search-inline input, .search-inline select{
+  flex:1 1 200px; padding:.8rem .9rem; border-radius:10px; border:1px solid #dbe5ea; background:#fff;
+}
+.search-inline .btn{padding:.8rem 1rem}
+
+.section{padding: clamp(26px, 6vw, 52px) 0}
+.section h2{margin:0 0 .6rem 0; font-size: clamp(1.3rem, 3vw, 1.8rem)}
+.cards{display:grid; grid-template-columns: repeat(auto-fill,minmax(250px,1fr)); gap:clamp(14px, 2.4vw, 22px)}
+.card{
+  background:var(--card);
+  padding:1rem; border-radius:var(--radius); box-shadow:var(--shadow);
+}
+.card h3{margin:.3rem 0 .35rem 0; font-size:1.05rem}
+.meta{color:var(--text-2); font-size:.95rem}
+.badge{display:inline-block; font-size:.8rem; background:#eaf6fa; color:var(--lagon-dark); padding:.25rem .5rem; border-radius:999px; margin-right:.35rem}
+
+.site-footer{background:#1f2326; color:#b8c2c7; margin-top:40px}
+.footer-inner{display:flex; justify-content:space-between; align-items:center; padding:1.2rem 0}
+.footer-inner a{color:#dbe5ea}
+
+.form{
+  background:#fff; padding:clamp(18px, 3vw, 26px); border-radius:var(--radius); box-shadow:var(--shadow);
+}
+.form .row{display:grid; grid-template-columns:1fr 1fr; gap:clamp(12px, 2.2vw, 18px)}
+.form label{font-weight:600; display:block; margin-bottom:.35rem}
+.form input, .form select, .form textarea{
+  width:100%; padding:.8rem .9rem; border:1px solid #dbe5ea; border-radius:10px; background:#fff;
+}
+.form textarea{min-height:140px; resize:vertical}
+.form .actions{margin-top:12px}
+
+.center{display:grid; place-items:center}
+.stack{display:grid; gap:clamp(12px, 2vw, 18px)}
+.auth-card{max-width:520px; width:100%}
+
+.filter-bar{
+  display:grid; grid-template-columns: repeat(5, minmax(120px, 1fr)); gap:.6rem;
+}
+@media (max-width: 900px){
+  .hero .grid{grid-template-columns:1fr}
+  .filter-bar{grid-template-columns: repeat(2, 1fr)}
+  .nav{gap:.6rem}
+}
