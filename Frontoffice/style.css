@@ -57,7 +57,7 @@ a:hover{color:var(--lagon)}
 
 .hero{
   padding: clamp(40px, 8vw, 80px) 0;
-  background: linear-gradient(180deg, #E8F6FA 0%, rgba(232,246,250,0.4) 100%);
+  background: linear-gradient(180deg, #ebedee 0%, rgba(232,246,250,0.4) 100%);
   border-bottom:1px solid #e7eef1;
 }
 .hero .grid{
