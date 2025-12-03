@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <nav>
+        <button><a href="login.php">Connexion</a></button>
+    </nav>
 </body>
 </html>
