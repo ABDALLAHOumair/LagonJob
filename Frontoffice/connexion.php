@@ -8,8 +8,8 @@
 </head>
 <body>
     <?php require(__DIR__.'/header.php')?>
-    <main class="hero center">
-        <div>
+    <main class="hero">
+        <div class="center">
             <h1>Connexion</h1>
             <form class="form auth-card">
                 <div class="stack">

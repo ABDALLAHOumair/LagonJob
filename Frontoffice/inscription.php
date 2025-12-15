@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once(__DIR__. "/connexionBDD.php")
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,40 +13,46 @@
 </head>
 <body>
     <?php require(__DIR__.'/header.php')?>
-    <main class="hero center">
-        <div>
+    <main class="hero">
+        <div class="center">
             <h1>Inscription</h1>
-            <form class="form auth-card">
+            <form action="submit_inscription.php" method="get" class="form auth-card">
                 <div class="stack">
                     <div class="row">
                         <div>
                             <label for="prenom">Prénom</label>
-                            <input type="textarea">
+                            <input type="textarea" id="prenom" name="prenom">
                         </div>
                         <div> 
                             <label for="nom">Nom</label>
-                            <input type="text" class="textarea">
+                            <input type="textarea" id="nom" name="nom">
                         </div>
                     </div>
 
                     <div>
                         <label for="email">Email</label>
-                        <input type="textarea">
+                        <input type="textarea" id="email" name="email">
                     </div>
                     
                     <div class="row">
                         <div>
-                            <label for="mdp">Mot de passe</label>
-                            <input type="textarea">
+                            <label for="password">Mot de passe</label>
+                            <input type="textarea" id="password" name="password">
                         </div>
                         <div> 
                             <label for="confirmer">Confirmer</label>
-                            <input type="text" class="textarea">
+                            <input type="textarea" id="confirmer" name="confirmer">
                         </div>
                     </div>
+                    <?php 
+                    if (isset($_SESSION['Error_message'])){
+                        echo $_SESSION['Error_message'];
+                        unset($_SESSION['Error_message']);
+                    } 
+                    ?>
                     <div>
-                        <button type="submit" class="btn btn-outline"><a href="">Créer mon compte</a></button>
-                        <button type="submit" class="btn btn-outline"><a href="connexion.php">Déjà inscrit?</a></button>
+                        <button type="submit" class="btn btn-outline">Créer mon compte</button>
+                        <button class="btn btn-outline"><a href="connexion.php">Déjà inscrit?</a></button>
                     </div>
                 </div>
             </form>
