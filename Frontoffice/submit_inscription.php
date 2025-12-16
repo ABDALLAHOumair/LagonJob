@@ -15,7 +15,7 @@ if (isset($_GET['email'])
     && !empty($_GET['confirmer'])){
         if ($_GET['confirmer'] != $_GET['password']){
             $_SESSION['Error_message'] = 
-            "Le mot de passe de confirmation ne correspond pas au mot de passe.";
+            "Les mots de passes ne sont pas identique.";
             redirectToUrl('inscription.php');
         }
         else{
