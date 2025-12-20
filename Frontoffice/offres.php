@@ -1,29 +1,41 @@
-<?php
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offre</title>
-</head>
-<body>
-    <h1>Offres d'emploi & stages</h1>
-   
-    <form action="offres.php" method="post">
-        <input type="text" name="Mot-clé" placeholder="Mot-clé" >
-        <select id="type" name="type" placeholder="Type">
-        <option value=""></option>
-        </select>
-        <select id="ville" name="ville" placeholder="ville" >
-        <option value=""></option>
-        </select>
-        <select id="télétravail" name="télétravail" placeholder="télétravail"> >
-        <option value=""></option> 
-        <br>
-        <br>
-        <input type="submit"></button>
-        <input type="reset"></button>
+<section class="section">
+  <div class="container">
+      <h2>Offres d'emploi & stages</h2>
 
-</body>
-</html>
+      <form action="offres.php" method="post">
+          <div class="filter-bar">
+
+              <input type="text" name="motcle" placeholder="Mot-clé">
+
+              <select name="type">
+                  <option value="">Type</option>
+                  <option value="stage">Stage</option>
+                  <option value="cdd">CDD</option>
+                  <option value="cdi">CDI</option>
+                  <option value="alternance">Alternance</option>
+              </select>
+
+              <select name="ville">
+                  <option value="">Ville</option>
+                  <option value="Mamoudzou">Mamoudzou</option>
+                  <option value="Dzaoudzi">Dzaoudzi</option>
+                  <option value="Koungou">Koungou</option>
+              </select>
+
+              <select name="teletravail">
+                  <option value="">Télétravail</option>
+                  <option value="oui">Oui</option>
+                  <option value="non">Non</option>
+                  <option value="hybride">Hybride</option>
+              </select>
+
+              <button type="submit" class="btn">Filtrer</button>
+
+          </div>
+
+          <div style="margin-top:10px;">
+              <button type="reset" class="btn btn-outline">Réinitialiser</button>
+          </div>
+      </form>
+  </div>
+</section>
