@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <section class="section">
-        <div class="container">
-            <h2>Offres d'emploi & stages</h2>
-
-            <form action="offres.php" method="post">
+    <?php require(__DIR__.'/header.php')?>
+    <div class="container">
+        <h2>Offres d'emploi & stages</h2>
+        <div>
+            <form class="form" action="offres.php" method="post">
                 <div class="filter-bar">
                     <select name="type">
                         <option value="">Type</option>
@@ -37,14 +36,11 @@
                     </select>
 
                     <button type="submit" class="btn">Filtrer</button>
-                </div>
-
-                <div style="margin-top:10px;">
                     <button type="reset" class="btn btn-outline">Réinitialiser</button>
                 </div>
             </form>
         </div>
-    </section>
+    </div>
 
     <?php
     // Données exemples
@@ -101,4 +97,5 @@
     </section>
 
 </body>
-</html>
+<footer class="site-footer footer-inner">
+... (11lignes restantes)
