@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -98,4 +102,14 @@
 
 </body>
 <footer class="site-footer footer-inner">
-... (11lignes restantes)
+    <div>
+        <p>© 2025 LagonJob - Tous droits réservés</p>
+    </div>
+    <nav class="nav">
+        <div> 
+            <a>Conditions</a>
+            <a href="contact.php">Nous contacter</a>
+        </div>
+    </nav>
+</footer>
+</html>

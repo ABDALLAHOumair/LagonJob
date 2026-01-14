@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -56,8 +60,8 @@
         © 2025 LagonJobs - Tous droits réservés
       </div>
       <div>
-        <a href="#">Confidentialité</a> &nbsp; | &nbsp;
-        <a href="#">Nous contacter</a>
+        <a href="">Confidentialité</a> &nbsp; | &nbsp;
+        <a href="contact.php">Nous contacter</a>
       </div>
     </div>
   </footer>

@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,20 +15,25 @@
     <main class="hero">
         <div class="center">
             <h1>Connexion</h1>
-            <form class="form auth-card">
+            <form action="submit_connexion.php" method="get" class="form auth-card">
                 <div class="stack">
                     <div>
                         <label for="email">Email</label>
-                        <input type="textarea">
+                        <input type="textarea" id="email" name="email">
                     </div>
                   
                     <div>
-                        <label for="mdp">Mot de passe</label>
-                        <input type="textarea">
+                        <label for="password">Mot de passe</label>
+                        <input type="textarea" id="password" name="password">
                     </div>
-
+                    <?php 
+                    if (isset($_SESSION['LOGIN_ERROR_MESSAGE'])){
+                        echo $_SESSION['LOGIN_ERROR_MESSAGE'];
+                        unset($_SESSION['LOGIN_ERROR_MESSAGE']);
+                    } 
+                    ?>
                     <div>
-                        <button type="submit" class="btn btn-outline"><a href="home.php">Se connecter</a></button>
+                        <button type="submit" class="btn btn-outline">Se connecter</button>
                         <button type="submit" class="btn btn-outline"><a href="inscription.php">Créer un compte</a></button>
                     </div>
 

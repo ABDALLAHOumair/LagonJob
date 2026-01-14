@@ -45,14 +45,18 @@ require_once(__DIR__. "/connexionBDD.php")
                         </div>
                     </div>
                     <?php 
-                    if (isset($_SESSION['Error_message'])){
-                        echo $_SESSION['Error_message'];
-                        unset($_SESSION['Error_message']);
-                    } 
+                    if (isset($_SESSION['Error_message_mdp'])){
+                        echo $_SESSION['Error_message_mdp'];
+                        unset($_SESSION['Error_message_mdp']);
+                    }
+                    if (isset($_SESSION['Error_message_inscription'])){
+                        echo $_SESSION['Error_message_inscription'];
+                        unset($_SESSION['Error_message_inscription']);
+                    }  
                     ?>
                     <div>
                         <button type="submit" class="btn btn-outline">Créer mon compte</button>
-                        <button class="btn btn-outline"><a href="connexion.php">Déjà inscrit?</a></button>
+                        <a href="connexion.php" class="btn btn-outline">Déjà inscrit?</a>
                     </div>
                 </div>
             </form>

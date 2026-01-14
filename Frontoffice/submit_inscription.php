@@ -14,12 +14,11 @@ if (isset($_GET['email'])
     && !empty($_GET['password'])
     && !empty($_GET['confirmer'])){
         if ($_GET['confirmer'] != $_GET['password']){
-            $_SESSION['Error_message'] = 
+            $_SESSION['Error_message_mdp'] = 
             "Les mots de passes ne sont pas identique.";
             redirectToUrl('inscription.php');
         }
         else{
-            /*      
                 $insertUser='INSERT INTO user(Email, Password, Nom, Prenom) VALUE(:Email, :Password, :Nom, :Prenom)';
                 $insertUser=$mysqlClient->prepare($insertUser);
                 $insertUser->execute([
@@ -30,10 +29,11 @@ if (isset($_GET['email'])
                 ]);
 
                 redirectToUrl('index.php');
-            */
         }
 }
 else{
-     echo "Veuillez fournir toutes les informations d'inscription";
+    $_SESSION['Error_message_inscription']=
+    "Veuillez fournir toutes les informations d'inscription.";
+    redirectToUrl('inscription.php');
 }
 ?>

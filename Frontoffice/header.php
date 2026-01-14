@@ -3,7 +3,11 @@
     <nav class="nav">
         <a href="home.php">Accuiel</a>
         <a href="offres.php">Offres</a>
-        <button class="btn btn-outline"><a href="connexion.php">Connexion</a></button>
-        <button class="btn btn-outline"><a href="inscription.php">inscription</a></button>
+        <?php if (!isset($_SESSION['LOGGED_USER'])) { ?>
+            <button class="btn btn-outline"><a href="connexion.php">Connexion</a></button>
+            <button class="btn btn-outline"><a href="inscription.php">inscription</a></button>
+        <?php } else{ ?>
+            <button class="btn btn-outline"><a href="deconnexion.php">Deconnexion</a></button>
+        <?php } ?>
     </nav>
 </header>
