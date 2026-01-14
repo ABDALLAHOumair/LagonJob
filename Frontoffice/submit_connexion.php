@@ -32,5 +32,5 @@ if (isset($postData['email']) &&  isset($postData['password'])) {
         }
     }
 
-    redirectToUrl('home.php');
+    redirectToUrl('index.php');
 }
