@@ -114,5 +114,17 @@
         </div>
     </section>
 
+<footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        © 2025 LagonJobs - Tous droits réservés
+      </div>
+      <div>
+        <a href="">Confidentialité</a> &nbsp; | &nbsp;
+        <a href="contact.php">Nous contacter</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
