@@ -22,7 +22,7 @@
 
     // Récupération des données pour les filtres
     $types = $conn->query("SELECT * FROM types_contrats")->fetchAll(PDO::FETCH_ASSOC);
-    $villes = $conn->query("SELECT * FROM villes ORDER BY Nom")->fetchAll(PDO::FETCH_ASSOC);
+    $villes = $conn->query("SELECT * FROM villes ORDER BY Nom_ville")->fetchAll(PDO::FETCH_ASSOC);
     $modes = $conn->query("SELECT * FROM modes_travails")->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
@@ -31,24 +31,25 @@
         <div>
             <form class="form" action="offres.php" method="post">
                 <div class="filter-bar">
+                    <input type="text" name="mots clés" placeholder="Mots clés" />
                     <select name="type">
                         <option value="">Type</option>
                         <?php foreach($types as $type): ?>
-                            <option value="<?php echo $type['Id']; ?>"><?php echo $type['Nom']; ?></option>
+                            <option value="<?php echo $type['Id']; ?>"><?php echo $type['Nom_type_contrat']; ?></option>
                         <?php endforeach; ?>
                     </select>
 
                     <select name="ville">
                         <option value="">Ville</option>
                         <?php foreach($villes as $ville): ?>
-                            <option value="<?php echo $ville['Id']; ?>"><?php echo $ville['Nom']; ?></option>
+                            <option value="<?php echo $ville['Id']; ?>"><?php echo $ville['Nom_ville']; ?></option>
                         <?php endforeach; ?>
                     </select>
 
                     <select name="mode">
                         <option value="">Mode de travail</option>
                         <?php foreach($modes as $mode): ?>
-                            <option value="<?php echo $mode['Id']; ?>"><?php echo $mode['Nom']; ?></option>
+                            <option value="<?php echo $mode['Id']; ?>"><?php echo $mode['Nom_mode_travail']; ?></option>
                         <?php endforeach; ?>
                     </select>
 
@@ -62,9 +63,9 @@
     <?php
     // Construction de la requête SQL avec filtres
     $sql = "SELECT o.Id, o.Titre, o.Description, 
-            tc.Nom as type, 
-            v.Nom as ville, 
-            mt.Nom as mode_travail
+            tc.Nom_type_contrat as type, 
+            v.Nom_ville as ville, 
+            mt.Nom_mode_travail as mode_travail
             FROM offres o
             INNER JOIN types_contrats tc ON o.Id_typ_contrat = tc.Id
             INNER JOIN villes v ON o.Id_ville = v.Id
@@ -87,6 +88,11 @@
     if (!empty($_POST['mode'])) {
         $sql .= " AND o.Id_mode_travail = :mode";
         $params[':mode'] = $_POST['mode'];
+    }
+
+    if (!empty($_POST['mots clés'])) {
+        $sql .= " AND o.Titre LIKE :mots_cles";
+        $params[':mots_cles'] = '%' . $_POST['mots clés'] . '%';
     }
 
     // Exécution de la requête
