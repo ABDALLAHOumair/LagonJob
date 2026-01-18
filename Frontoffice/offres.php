@@ -11,7 +11,10 @@
 
     <?php
     // Connexion à la base de données
-    $host = 'localhost';$dbname = 'lagonjob';$username = 'root';$password = '';
+    $host = 'localhost';
+    $dbname = 'lagonjob';
+    $username = 'root';
+    $password = '';
 
     try {
         $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
@@ -31,7 +34,8 @@
         <div>
             <form class="form" action="offres.php" method="post">
                 <div class="filter-bar">
-                    <input type="text" name="mots clés" placeholder="Mots clés" />
+                    <input type="text" name="mots_cles" placeholder="Mots-clés" value="<?php echo isset($_POST['mots_cles']) ? $_POST['mots_cles'] : ''; ?>">
+                    
                     <select name="type">
                         <option value="">Type</option>
                         <?php foreach($types as $type): ?>
@@ -54,7 +58,7 @@
                     </select>
 
                     <button type="submit" class="btn">Filtrer</button>
-                    <button type="reset" class="btn btn-outline">Réinitialiser</button>
+                    <button type="button" class="btn btn-outline" onclick="window.location.href='offres.php'">Réinitialiser</button>
                 </div>
             </form>
         </div>
@@ -75,6 +79,11 @@
     $params = [];
 
     // Ajout des filtres
+    if (!empty($_POST['mots_cles'])) {
+        $sql .= " AND (o.Titre LIKE :mots_cles OR o.Description LIKE :mots_cles)";
+        $params[':mots_cles'] = '%' . $_POST['mots_cles'] . '%';
+    }
+
     if (!empty($_POST['type'])) {
         $sql .= " AND o.Id_typ_contrat = :type";
         $params[':type'] = $_POST['type'];
@@ -88,11 +97,6 @@
     if (!empty($_POST['mode'])) {
         $sql .= " AND o.Id_mode_travail = :mode";
         $params[':mode'] = $_POST['mode'];
-    }
-
-    if (!empty($_POST['mots clés'])) {
-        $sql .= " AND o.Titre LIKE :mots_cles";
-        $params[':mots_cles'] = '%' . $_POST['mots clés'] . '%';
     }
 
     // Exécution de la requête
@@ -120,17 +124,18 @@
         </div>
     </section>
 
-<footer class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        © 2025 LagonJobs - Tous droits réservés
-      </div>
-      <div>
-        <a href="">Confidentialité</a> &nbsp; | &nbsp;
-        <a href="contact.php">Nous contacter</a>
-      </div>
-    </div>
-  </footer>
-
 </body>
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div>
+                <strong>LagonJobs</strong> © 2024 - Plateforme d'emploi à Mayotte
+            </div>
+            <div>
+                <a href="contact.php">Contact</a> | 
+                <a href="#">Mentions légales</a>
+            </div>
+        </div>
+    </div>
+</footer>
 </html>
