@@ -117,7 +117,12 @@
                             <span class="badge"><?php echo $offre['mode_travail']; ?></span>
                         </div>
                         <p><?php echo $offre['Description']; ?></p>
-                        <a href="detail.php?id=<?php echo $offre['Id']; ?>" class="btn" style="margin-top:10px;">Voir détails</a>
+                        
+                        <!-- Formulaire avec ID caché -->
+                        <form action="detailoffre.php" method="post" style="margin-top:10px;">
+                            <input type="hidden" name="id" value="<?php echo $offre['Id']; ?>">
+                            <button type="submit" class="btn">Voir détails</button>
+                        </form>
                     </div>
                 <?php endforeach; ?>
             </div>
