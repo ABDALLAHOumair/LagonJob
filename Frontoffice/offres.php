@@ -71,7 +71,7 @@
             v.Nom_ville as ville, 
             mt.Nom_mode_travail as mode_travail
             FROM offres o
-            INNER JOIN types_contrats tc ON o.Id_typ_contrat = tc.Id
+            INNER JOIN types_contrats tc ON o.Id_type_contrat = tc.Id
             INNER JOIN villes v ON o.Id_ville = v.Id
             INNER JOIN modes_travails mt ON o.Id_mode_travail = mt.Id
             WHERE 1=1";
