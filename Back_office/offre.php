@@ -1,17 +1,21 @@
-<?php 
-session_start();
-?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offres - LagonJobs</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Tableau de bord</title>
+    <link rel="stylesheet" href="../Frontoffice/style.css">
 </head>
 <body>
-    <?php require(__DIR__.'/header.php')?>
-
+    <header class="site-header header-inner">
+    <h1><a href="index.php">Lagonjob</a></h1>
+    <nav class="nav">
+        <a href="index.php">Accuiel</a>
+        <a href="utilisateur.php">Utilisateurs</a>
+        <a href="offre.php">Offres</a>
+        <a href="contact.php">Contact</a>
+    </nav>
+    </header>
     <?php
     // Connexion à la base de données
     $host = 'localhost';
@@ -35,48 +39,34 @@ session_start();
     <div class="container">
         <h2>Offres d'emploi & stages</h2>
         <div>
-            <form class="form" action="offres.php" method="post">
+            <form class="form" action="offre.php" method="post">
                 <div class="filter-bar">
                     <input type="text" name="mots_cles" placeholder="Mots-clés" value="<?php echo isset($_POST['mots_cles']) ? $_POST['mots_cles'] : ''; ?>">
                     
                     <select name="type">
                         <option value="">Type</option>
                         <?php foreach($types as $type): ?>
-                            <option value="<?php echo $type['Id']; ?>" 
-                                <?php if (isset($_POST['type']) && $type['Id']==$_POST['type']){?>
-                                    selected<?php 
-                                }?>>
-                                <?php echo $type['Nom_type_contrat']; ?>
-                            </option>
+                            <option value="<?php echo $type['Id']; ?>"><?php echo $type['Nom_type_contrat']; ?></option>
                         <?php endforeach; ?>
                     </select>
 
                     <select name="ville">
                         <option value="">Ville</option>
                         <?php foreach($villes as $ville): ?>
-                            <option value="<?php echo $ville['Id']; ?>"
-                                <?php if (isset($_POST['ville']) && $ville['Id']==$_POST['ville']){?>
-                                    selected<?php 
-                                }?>>
-                                <?php echo $ville['Nom_ville']; ?>
-                            </option>
+                            <option value="<?php echo $ville['Id']; ?>"><?php echo $ville['Nom_ville']; ?></option>
                         <?php endforeach; ?>
                     </select>
 
                     <select name="mode">
                         <option value="">Mode de travail</option>
                         <?php foreach($modes as $mode): ?>
-                            <option value="<?php echo $mode['Id']; ?>"
-                                <?php if (isset($_POST['mode']) && $mode['Id']==$_POST['mode']){?>
-                                    selected<?php 
-                                }?>>
-                                <?php echo $mode['Nom_mode_travail']; ?>
-                            </option>
+                            <option value="<?php echo $mode['Id']; ?>"><?php echo $mode['Nom_mode_travail']; ?></option>
                         <?php endforeach; ?>
                     </select>
 
                     <button type="submit" class="btn">Filtrer</button>
-                    <button type="button" class="btn btn-outline" onclick="window.location.href='offres.php'">Réinitialiser</button>
+                    <button type="button" class="btn btn-outline" onclick="window.location.href='offre.php'">Réinitialiser</button>
+                    <button type="button" class="btn btn-outline" onclick="window.location.href='ajouter.php'">Ajouter</button>
                 </div>
             </form>
         </div>
@@ -135,9 +125,7 @@ session_start();
                             <span class="badge"><?php echo $offre['mode_travail']; ?></span>
                         </div>
                         <p><?php echo $offre['Description']; ?></p>
-                        
-                        <!-- Formulaire avec ID caché -->
-                        <form action="detailoffre.php" method="post" style="margin-top:10px;">
+                        <form action="detailoffreBE.php" method="post" style="margin-top:10px;">
                             <input type="hidden" name="id" value="<?php echo $offre['Id']; ?>">
                             <button type="submit" class="btn">Voir détails</button>
                         </form>

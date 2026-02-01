@@ -55,8 +55,8 @@ require_once(__DIR__. "/connexionBDD.php")
                     }  
                     ?>
                     <div>
-                        <button type="submit" class="btn btn-outline">Créer mon compte</button>
-                        <a href="connexion.php" class="btn btn-outline">Déjà inscrit?</a>
+                        <button class="btn btn-outline">Créer mon compte</button>
+                        <button type="button" class="btn btn-outline" onclick="window.location.href='connexion.php'">Déjà inscrit?</button>
                     </div>
                 </div>
             </form>

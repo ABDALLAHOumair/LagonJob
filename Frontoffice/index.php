@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once(__DIR__ . '/fonctions.php');
+require_once(__DIR__ . '/connexionBDD.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,17 +19,34 @@ session_start();
                 <div>
                     <h1>Trouvez votre stage ou emploi facilement</h1>
                     <p>Des offres claires et à jour, pour étudiants et jeunes diplômés. Recherchez par mot clé, lieu, type de contrât et type de travail. </p>  
-                
-                    <form action="" method="" class="form cards .search-inline">
-                        <input type="textarea" placeholder="Mot-clé(ex. PHP, support, réseau)">
-                        <select name="Type_de_contrat" class="card">
-                            <option>Type de contrat</option>
+                    <form action="offres.php" method="post" class="form cards .search-inline ">
+                        <input type="text" name="mots_cles" placeholder="Mot-clé(ex. PHP, support, réseau)">
+                        <select name="type" class="card">
+                            <option value="">type de contrat</option>
+                            <?php foreach ($listeContrat as $type) {?> 
+                                <option value="<?php echo $type['Id']?>">
+                                    <?php echo $type['Nom_type_contrat']?>
+                                </option>
+                            <?php } ?>
                         </select>
-                        <input type="textarea" placeholder="Ville (ex. Mamoudzou)">
-                        <select name="Type_de_contrat" class="card">
-                            <option>Type de travail</option>
+                        <select name="ville" class="card">
+                            <option value="">ville</option>
+                            <?php foreach ($listeVille as $ville) {?> 
+                                <option value="<?php echo $ville['Id']?>">
+                                    <?php echo $ville['Nom_ville']?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                        <select name="mode" class="card">
+                            <option value="">type de travail</option>
+                            <?php foreach ($listeModeTravail as $mode) {?> 
+                                <option value="<?php echo $mode['Id']?>">
+                                    <?php echo $mode['Nom_mode_travail']?>
+                                </option>
+                            <?php } ?> 
                         </select>
                         <button type="submit" class="btn">Rechercher</button>
+                        <button type="button" class="btn btn-outline" onclick="window.location.href='index.php'">Réinitialiser</button>
                     </form>
                 </div>
                 <div class="card">
@@ -50,27 +69,20 @@ session_start();
             <div class="container">
                 <h2>Dernières offres</h2>
                 <div class="cards">
-                    <article class="card">
-                        <span class="badge">stage</span><br>
-                        <h2>Stagiaire Developpeur Web</h2><br>
-                        <p>Mamoudzou - Hybride</p><br>
-                        <p>Participer au développement et é-commerce.</p><br>
-                        <button type="submit" class="btn btn-outline">Voir</button>  
-                    </article>
-                    <article class="card">
-                        <span class="badge">CDD</span><br>
-                        <h2>Technicien support</h2><br>
-                        <p>Dzaoudzi - Hybride</p><br>
-                        <p>Assistance virtuttiese. Induction et maitenance.</p><br>
-                        <button type="submit" class="btn btn-outline">Voir</button>      
-                    </article>
-                    <article class="card">
-                        <span class="badge">CDI</span><br>
-                        <h2>Admin systeme junior</h2><br>
-                        <p>Koungou - Hybride</p><br>
-                        <p>Administration Linux/windo-sauvegarde à suivre.</p><br>
-                        <button type="submit" class="btn btn-outline">Voir</button>     
-                    </article>
+                    <?php for ($i=0; $i <4 ; $i++) { ?> 
+                        <div class="">
+                            <article class="card">
+                                <span class="badge"><?php echo $listeOffre[$i]['Nom_type_contrat']?></span><br>
+                                <h2><?php echo $listeOffre[$i]['Titre'] ?></h2><br>
+                                <p><?php echo $listeOffre[$i]['Nom_ville'].' - '. $listeOffre[$i]['Nom_mode_travail'] ?></p><br>
+                                <p><?php echo $listeOffre[$i]['Description'] ?></p><br>
+                                <form action="detailoffre.php" method="post">
+                                    <input type="hidden" name="id" value="<?php echo $listeOffre[$i]['Id']?>">
+                                    <button type="submit" class="btn">voir</button>
+                                </form> 
+                            </article>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

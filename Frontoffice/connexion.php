@@ -34,7 +34,7 @@ session_start();
                     ?>
                     <div>
                         <button type="submit" class="btn btn-outline">Se connecter</button>
-                        <button type="submit" class="btn btn-outline"><a href="inscription.php">Créer un compte</a></button>
+                        <button type="button" class="btn btn-outline" onclick="window.location.href='inscription.php'">Créer un compte</a></button>
                     </div>
 
                     <div>

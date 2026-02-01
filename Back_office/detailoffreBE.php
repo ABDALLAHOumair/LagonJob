@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once(__DIR__ . '/../Frontoffice/fonctions.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -7,14 +7,21 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détail de l'offre - LagonJobs</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../Frontoffice/style.css">
 </head>
 <body>
-    <?php require(__DIR__.'/header.php')?>
-
+    <header class="site-header header-inner">
+        <h1><a href="index.php">Lagonjob</a></h1>
+        <nav class="nav">
+            <a href="index.php">Accuiel</a>
+            <a href="utilisateur.php">Utilisateurs</a>
+            <a href="offre.php">Offres</a>
+            <a href="contact.php">Contact</a>
+        </nav>
+    </header>
     <?php
     // Connexion à la base de données
-    require_once(__DIR__ . '/connexionBDD.php');
+    require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 
     // Vérifier si l'ID a été envoyé en POST
     if (!empty($_POST['id'])) {
@@ -26,12 +33,14 @@ session_start();
                 o.Mission as mission, 
                 o.Profile as profile, 
                 o.Duree as durée, 
+                s.Statut as statut, 
                 v.Nom_ville as ville, 
                 mt.Nom_mode_travail as mode_travail
                 FROM offres o
                 INNER JOIN types_contrats tc ON o.Id_type_contrat = tc.Id
                 INNER JOIN villes v ON o.Id_ville = v.Id
                 INNER JOIN modes_travails mt ON o.Id_mode_travail = mt.Id
+                INNER JOIN statuts s ON o.Id_statut = s.Id
                 WHERE o.Id = :id";
         
         $stmt = $mysqlClient->prepare($sql);
@@ -54,19 +63,23 @@ session_start();
                     <p><strong>Mission : </strong><?php echo $offre['mission']; ?></p>
                     <p><strong>Profile : </strong><?php echo $offre['profile']; ?></p>
                     <div style="margin-top: 20px; display: flex; gap: 10px;">
-                        <?php if (isset($_SESSION['LOGGED_USER'])): ?>
-                            <!-- Formulaire pour postuler -->
-                            <form action="postuler.php" method="post">
-                                <input type="hidden" name="id_offre" value="<?php echo $offre['Id']; ?>">
-                                <button type="submit" class="btn">Postuler à cette offre</button>
-                            </form>
-                        <?php else: ?>
-                            <button type="button" class="btn" onclick="window.location.href='connexion.php'">Connectez-vous pour postuler</button>
-                        <?php endif; ?>
-                        
-                        <!-- Formulaire pour retour à la liste -->
-                        <form action="offres.php" method="get">
-                            <button type="submit" class="btn">Retour aux offres</button>
+                        <form action="modification.php" method="post">
+                            <input type="hidden" name="id_offre" value="<?php echo $_POST['id']; ?>">
+                                <?php foreach ($listeOffre as $Offre) {
+                                    if ($Offre['Id']==$_POST['id']) {?>
+                                        <input type="hidden" name="statut" value="<?php echo $Offre['Statut']?>">
+                                        <input type="hidden" name="type_travail" value="<?php echo $Offre['Nom_type_contrat']?>">
+                                        <input type="hidden" name="mode_travail" value="<?php echo $Offre['Nom_mode_travail']?>">
+                                        <input type="hidden" name="ville" value="<?php echo $Offre['Nom_ville']?>">
+                                        <input type="hidden" name="description" value="<?php echo $Offre['Description']?>">
+                                <?php } }  ?>
+
+                            <button type="submit" class="btn">Modifier</button>
+                        </form>
+
+                        <form action="suppression.php" method="post">
+                            <input type="hidden" name="id_offre" value="<?php echo $_POST['id']; ?>">
+                            <button type="submit" class="btn">Supprimer</button>
                         </form>
                     </div>
                 </div>

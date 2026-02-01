@@ -4,10 +4,10 @@
         <a href="index.php">Accuiel</a>
         <a href="offres.php">Offres</a>
         <?php if (!isset($_SESSION['LOGGED_USER'])) { ?>
-            <button class="btn btn-outline"><a href="connexion.php">Connexion</a></button>
-            <button class="btn btn-outline"><a href="inscription.php">inscription</a></button>
+            <button class="btn btn-outline" onclick="window.location.href='connexion.php'">Connexion</button>
+            <button class="btn btn-outline" onclick="window.location.href='inscription.php'">inscription</button>
         <?php } else{ ?>
-            <button class="btn btn-outline"><a href="deconnexion.php">Deconnexion</a></button>
+            <button class="btn btn-outline" onclick="window.location.href='deconnexion.php'">Deconnexion</button>
         <?php } ?>
     </nav>
 </header>
