@@ -150,3 +150,27 @@ a:hover{color:var(--lagon)}
 .table-offres td form {
   display: inline-block;
 }
+
+.btn-retour {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: none;
+border: none;
+color: #007EA7;
+font-size: 14px;
+cursor: pointer;
+font-weight: 500;
+}
+
+.btn-retour:hover {
+text-decoration: none;
+}
+
+.fleche {
+width: 8px;
+height: 8px;
+border-left: 3px solid #007EA7;
+border-bottom: 3px solid #007EA7;
+transform: rotate(45deg);
+}

@@ -66,7 +66,7 @@
 
                     <button type="submit" class="btn">Filtrer</button>
                     <button type="button" class="btn btn-outline" onclick="window.location.href='offre.php'">Réinitialiser</button>
-                    <button type="button" class="btn btn-outline" onclick="window.location.href='ajouter.php'">Ajouter</button>
+                    <button type="button" class="btn btn-outline" onclick="window.location.href='ajouter_offre.php'">Ajouter</button>
                 </div>
             </form>
         </div>

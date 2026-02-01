@@ -22,7 +22,13 @@ require_once(__DIR__. "/../Frontoffice/fonctions.php");
     </header>
     <main class="container">
         <h1>Ajout d'offre </h1>
-        <form class="form" action="submit_ajout.php" method="post">
+        <div class="meta" style="margin-bottom: 20px;">
+            <button class="btn-retour" onclick="history.back()">
+                <span class="fleche"></span>
+                Retour
+            </button>  
+        </div>
+        <form class="form" action="submit_ajout_offre.php" method="post">
 
             <div class="stack">
 
@@ -97,7 +103,6 @@ require_once(__DIR__. "/../Frontoffice/fonctions.php");
                 
                 <div class="">
                     <button class="btn" type="submit">Ajouter</button>
-                    <button type="button" class="btn btn-outline" onclick="window.location.href='offre.php'">Retour</button>
                 </div>
             </div>
         </form>

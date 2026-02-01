@@ -75,18 +75,23 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                     <?php echo $listeOffre[$i]['Nom_type_contrat'] ?>
                                 </td>
                                 <td>
-                                    <form action="modification.php" method="post">
+                                    <form action="modification_offre.php" method="post">
                                         <input type="hidden" name="id_offre" value="<?php echo $listeOffre[$i]['Id']?>">
                                         <input type="hidden" name="statut" value="<?php echo $listeOffre[$i]['Statut']?>">
                                         <input type="hidden" name="type_travail" value="<?php echo $listeOffre[$i]['Nom_type_contrat']?>">
                                         <input type="hidden" name="mode_travail" value="<?php echo $listeOffre[$i]['Nom_mode_travail']?>">
                                         <input type="hidden" name="ville" value="<?php echo $listeOffre[$i]['Nom_ville']?>">
                                         <input type="hidden" name="description" value="<?php echo $listeOffre[$i]['Description']?>">
-                                        <button type="submit" class="btn">modifier</button>
+                                        <button type="submit" class="btn">Modifier</button>
                                     </form> 
-                                    <form action="suppression.php" method="post">
+                                    <form action="suppression_offre.php" method="post">
                                         <input type="hidden" name="id_offre" value="<?php echo $listeOffre[$i]['Id']?>">
-                                        <button type="submit" class="btn">supprimer</button>
+                                        <input type="hidden" name="statut" value="<?php echo $listeOffre[$i]['Statut']?>">
+                                        <input type="hidden" name="type_travail" value="<?php echo $listeOffre[$i]['Nom_type_contrat']?>">
+                                        <input type="hidden" name="mode_travail" value="<?php echo $listeOffre[$i]['Nom_mode_travail']?>">
+                                        <input type="hidden" name="ville" value="<?php echo $listeOffre[$i]['Nom_ville']?>">
+                                        <input type="hidden" name="description" value="<?php echo $listeOffre[$i]['Description']?>">
+                                        <button type="submit" class="btn">Supprimer</button>
                                     </form>
                                 </td>
                             </tr>

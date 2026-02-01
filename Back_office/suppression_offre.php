@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de bord</title>
+    <title>Tableau de bord-Suppression</title>
     <link rel="stylesheet" href="../Frontoffice/style.css">
 </head>
 <body>
@@ -21,8 +21,14 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
         </nav>
     </header>
     <main class="container">
-        <h1>Modification d'offre</h1>
-        <form class="form" action="submit_modification.php" method="post">
+        <h1>Suppression d'offre</h1>
+        <div class="meta" style="margin-bottom: 20px;">
+            <button class="btn-retour" onclick="history.back()">
+                <span class="fleche"></span>
+                Retour
+            </button>  
+        </div>
+        <form class="form" action="submit_suppression_offre.php" method="post">
             <div class="stack">
                 <div class="row">
                     <div>
@@ -32,7 +38,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                 if ($offre['Id'] == $_POST['id_offre']) {
                                     echo $offre['Titre']; 
                                 }
-                            } ?>">
+                            } ?>" disabled>
                     </div>
 
                     <div>
@@ -42,13 +48,13 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                 if ($offre['Id'] == $_POST['id_offre']) {
                                     echo $offre['Duree']; 
                                 }
-                            } ?>">
+                            } ?>" disabled>
                     </div>
 
 
                     <div>
                         <label for="statut">Statut</label>
-                        <select name="statut" class="card">
+                        <select name="statut" class="card" disabled>
                            <?php for ($i=0; $i < count($listestatut) ; $i++) {?> 
                                 <option value="<?php echo $listestatut[$i]['Id']?>" 
                                 <?php if ($listestatut[$i]['Statut']==$_POST['statut']){?>selected<?php }?>>
@@ -60,7 +66,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 
                     <div>
                         <label for="type">Type de travail</label>
-                        <select name="type" class="card">
+                        <select name="type" class="card" disabled>
                            <?php for ($i=0; $i < count($listeContrat) ; $i++) {?> 
                                 <option value="<?php echo $listeContrat[$i]['Id']?>"
                                 <?php if ($listeContrat[$i]['Nom_type_contrat']==$_POST['type_travail']){?>selected<?php }?>>
@@ -72,7 +78,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 
                     <div>
                         <label for="mode">Mode de travail</label>
-                        <select name="mode" class="card">
+                        <select name="mode" class="card" disabled>
                            <?php for ($i=0; $i < count($listeModeTravail) ; $i++) {?> 
                                 <option value=<?php echo $listeModeTravail[$i]['Id']?>
                                     <?php if ($listeModeTravail[$i]['Nom_mode_travail']==$_POST['mode_travail']){?>selected<?php }?>>
@@ -84,7 +90,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 
                     <div>
                         <label for="ville">Ville</label>
-                        <select name="ville" class="card">
+                        <select name="ville" class="card" disabled>
                            <?php for ($i=0; $i < count($listeVille) ; $i++) {?> 
                                 <option value="<?php echo $listeVille[$i]['Id']?>"
                                 <?php if ($listeVille[$i]['Nom_ville']==$_POST['ville']){?>selected<?php }?>>
@@ -97,7 +103,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 
                 <div>
                     <label for="description">Description</label>
-                    <textarea id="description" name="description"
+                    <textarea id="description" name="description" disabled
                         ><?php foreach ($listeOffre as $offre) {
                             if ($offre['Id'] == $_POST['id_offre']) {
                                 echo $offre['Description']; 
@@ -106,7 +112,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                 </div>
                 <div>
                     <label for="mission">Mission</label>
-                    <textarea id="mission" name="mission"
+                    <textarea id="mission" name="mission" disabled
                         ><?php foreach ($listeOffre as $offre) {
                             if ($offre['Id'] == $_POST['id_offre']) {
                                 echo $offre['Mission']; 
@@ -115,7 +121,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                 </div>
                 <div>
                     <label for="profile">Profile</label>
-                    <textarea id="profile" name="profile"
+                    <textarea id="profile" name="profile" disabled
                         ><?php foreach ($listeOffre as $offre) {
                             if ($offre['Id'] == $_POST['id_offre']) {
                                 echo $offre['Profile']; 
@@ -124,8 +130,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                 </div>
                 <input type="hidden" name="id_offre" value="<?php echo $_POST['id_offre']?>">
                 <div class="actions">
-                    <button class="btn" type="submit">modifier</button>
-                    <button type="button" class="btn btn-outline" onclick="window.location.href='index.php'">Retour</button>
+                    <button class="btn" type="submit">Supprimer</button>
                 </div>
             </div>
 

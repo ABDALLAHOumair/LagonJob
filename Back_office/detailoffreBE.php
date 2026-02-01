@@ -50,7 +50,13 @@ require_once(__DIR__ . '/../Frontoffice/fonctions.php');
         if ($offre) {
             ?>
             <section class="section">
-                <div class="container card">                  
+                <div class="container" style="margin-bottom: 20px;">
+                    <button class="btn-retour" onclick="history.back()">
+                        <span class="fleche"></span>
+                        Retour
+                    </button>  
+                </div>
+                <div class="container card">
                     <div class="meta" style="margin-bottom: 20px;">
                         <span class="badge"><?php echo $offre['type']; ?></span>
                     </div>
@@ -63,7 +69,7 @@ require_once(__DIR__ . '/../Frontoffice/fonctions.php');
                     <p><strong>Mission : </strong><?php echo $offre['mission']; ?></p>
                     <p><strong>Profile : </strong><?php echo $offre['profile']; ?></p>
                     <div style="margin-top: 20px; display: flex; gap: 10px;">
-                        <form action="modification.php" method="post">
+                        <form action="modification_offre.php" method="post">
                             <input type="hidden" name="id_offre" value="<?php echo $_POST['id']; ?>">
                                 <?php foreach ($listeOffre as $Offre) {
                                     if ($Offre['Id']==$_POST['id']) {?>
@@ -73,12 +79,19 @@ require_once(__DIR__ . '/../Frontoffice/fonctions.php');
                                         <input type="hidden" name="ville" value="<?php echo $Offre['Nom_ville']?>">
                                         <input type="hidden" name="description" value="<?php echo $Offre['Description']?>">
                                 <?php } }  ?>
-
                             <button type="submit" class="btn">Modifier</button>
                         </form>
 
-                        <form action="suppression.php" method="post">
+                        <form action="suppression_offre.php" method="post">
                             <input type="hidden" name="id_offre" value="<?php echo $_POST['id']; ?>">
+                                <?php foreach ($listeOffre as $Offre) {
+                                    if ($Offre['Id']==$_POST['id']) {?>
+                                        <input type="hidden" name="statut" value="<?php echo $Offre['Statut']?>">
+                                        <input type="hidden" name="type_travail" value="<?php echo $Offre['Nom_type_contrat']?>">
+                                        <input type="hidden" name="mode_travail" value="<?php echo $Offre['Nom_mode_travail']?>">
+                                        <input type="hidden" name="ville" value="<?php echo $Offre['Nom_ville']?>">
+                                        <input type="hidden" name="description" value="<?php echo $Offre['Description']?>">
+                                <?php } }  ?>
                             <button type="submit" class="btn">Supprimer</button>
                         </form>
                     </div>
