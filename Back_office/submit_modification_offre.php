@@ -44,7 +44,7 @@ if (isset($_POST['titre'])
             'Duree'=> $_POST['duree'],
             'Id'=> $_POST['id_offre'],
         ]);
-        redirectToUrl('index.php'); 
+        redirectToUrl('offre.php'); 
     }
     else{
         echo "Tout les champs n'ont pas étaient remplis"; 

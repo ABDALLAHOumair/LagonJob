@@ -24,7 +24,7 @@ session_start();
                   
                     <div>
                         <label for="password">Mot de passe</label>
-                        <input type="textarea" id="password" name="password">
+                        <input type="Password" id="password" name="password">
                     </div>
                     <?php 
                     if (isset($_SESSION['LOGIN_ERROR_MESSAGE'])){

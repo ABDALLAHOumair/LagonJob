@@ -37,7 +37,7 @@ require_once(__DIR__. "/connexionBDD.php")
                     <div class="row">
                         <div>
                             <label for="password">Mot de passe</label>
-                            <input type="textarea" id="password" name="password">
+                            <input type="password" id="password" name="password">
                         </div>
                         <div> 
                             <label for="confirmer">Confirmer</label>
@@ -52,6 +52,10 @@ require_once(__DIR__. "/connexionBDD.php")
                     if (isset($_SESSION['Error_message_inscription'])){
                         echo $_SESSION['Error_message_inscription'];
                         unset($_SESSION['Error_message_inscription']);
+                    }  
+                    if (isset($_SESSION['Error_message_email'])){
+                        echo $_SESSION['Error_message_email'];
+                        unset($_SESSION['Error_message_email']);
                     }  
                     ?>
                     <div>
