@@ -79,7 +79,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                         <button type="submit" class="btn">Modifier</button>
                                     </form> 
                                     <form action="suppression_user.php" method="post">
-                                        <input type="hidden" name="id_offre" value="<?php echo $listeUser[$i]['Id']?>">
+                                        <input type="hidden" name="id_user" value="<?php echo $listeUser[$i]['Id']?>">
                                         <input type="hidden" name="nom" value="<?php echo $listeUser[$i]['Nom']?>">
                                         <input type="hidden" name="prenom" value="<?php echo $listeUser[$i]['Prenom']?>">
                                         <input type="hidden" name="email" value="<?php echo $listeUser[$i]['Email']?>">
