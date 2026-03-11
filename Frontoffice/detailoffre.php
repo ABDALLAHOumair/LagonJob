@@ -41,6 +41,12 @@ session_start();
         if ($offre) {
             ?>
             <section class="section">
+                <div class="container meta" style="margin-bottom: 20px;">
+                    <button class="btn-retour" onclick="history.back()">
+                        <span class="fleche"></span>
+                        Retour
+                    </button>  
+                </div>
                 <div class="container card">                  
                     <div class="meta" style="margin-bottom: 20px;">
                         <span class="badge"><?php echo $offre['type']; ?></span>
