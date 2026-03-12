@@ -41,7 +41,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                         </div>
                         <div>
                             <button type="submit" class="btn">Filtrer</button>
-                            <button type="button" class="btn btn-outline" onclick="window.location.href='offres.php'">Réinitialiser</button>
+                            <button type="button" class="btn btn-outline" onclick="window.location.href='offre.php'">Réinitialiser</button>
                         </div>
                 </form>
             </div>

@@ -2,7 +2,7 @@
 session_start();
 require_once(__DIR__ . '/fonctions.php');
 require_once(__DIR__ . '/connexionBDD.php');
-$postData = $_GET;
+$postData = $_POST;
 
 // Validation du formulaire
 if (isset($postData['email']) &&  isset($postData['password'])) {

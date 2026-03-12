@@ -15,16 +15,16 @@ session_start();
     <main class="hero">
         <div class="center">
             <h1>Connexion</h1>
-            <form action="submit_connexion.php" method="get" class="form auth-card">
+            <form action="submit_connexion.php" method="post" class="form auth-card">
                 <div class="stack">
                     <div>
                         <label for="email">Email</label>
-                        <input type="textarea" id="email" name="email">
+                        <input type="textarea" id="email" name="email" required>
                     </div>
                   
                     <div>
                         <label for="password">Mot de passe</label>
-                        <input type="Password" id="password" name="password">
+                        <input type="Password" id="password" name="password" required>
                     </div>
                     <?php 
                     if (isset($_SESSION['LOGIN_ERROR_MESSAGE'])){

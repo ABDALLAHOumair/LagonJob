@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 24 jan. 2026 à 06:57
+-- Généré le : jeu. 12 mars 2026 à 09:45
 -- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Version de PHP : 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,17 +57,17 @@ CREATE TABLE `offres` (
   `Id_statut` int(11) NOT NULL,
   `Mission` varchar(1000) NOT NULL,
   `Profile` varchar(1000) NOT NULL,
-  `Durée` varchar(1000) NOT NULL
+  `Duree` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `offres`
 --
 
-INSERT INTO `offres` (`Id`, `Titre`, `Id_type_contrat`, `Id_mode_travail`, `Id_ville`, `Description`, `Id_statut`, `Mission`, `Profile`, `Durée`) VALUES
+INSERT INTO `offres` (`Id`, `Titre`, `Id_type_contrat`, `Id_mode_travail`, `Id_ville`, `Description`, `Id_statut`, `Mission`, `Profile`, `Duree`) VALUES
 (1, 'Développeur Web Junior', 1, 4, 20, 'Rejoignez notre équipe dynamique.', 2, 'Développer et maintenir des sites web (HTML, CSS, JavaScript), Intégrer des maquettes UI/UX (Figma, Adobe XD), Corriger des bugs et améliorer les performances, Participer à l’optimisation SEO technique, Collaborer avec, l’équipe design et back-end\r\n\r\nRédiger une documentation technique simple', 'Motivation, HTML/CSS, bases JavaScript, apprentissage rapide, travail en équipe, rigueur.', '6 mois'),
 (2, 'Stage Assistant Marketing', 3, 3, 27, 'Stage de 6 mois.', 2, 'Participer à la création de contenus (réseaux sociaux, newsletters, blogs), Aider à la gestion des campagnes marketing digitales, Réaliser des études de marché et analyses de concurrence, Mettre à jour le site web et les supports commerciauxSuivre les indicateurs de performance (KPI), Assister à l’organisation d’événements ou de promotions', 'Créativité, communication, réseaux sociaux, marketing digital, organisation, esprit d’équipe.', '3 à 5 mois.'),
-(3, 'Technicien Réseau', 2, 2, 35, 'Installation et maintenance.', 1, 'Installer et configurer les équipements réseau (routeurs, switches), Assurer la maintenance et le dépannage du réseau, Surveiller la sécurité et les performances réseau, Gérer les comptes utilisateurs et les accès, Documenter les incidents et interventions, Assister les utilisateurs en support technique.', 'Réseaux informatiques, maintenance, support technique, sécurité, organisation, réactivité.', 'Durée indéterminé '),
+(3, 'Technicien Réseau', 1, 2, 35, 'Installation et maintenance.', 2, 'Installer et configurer les équipements réseau (routeurs, switches), Assurer la maintenance et le dépannage du réseau, Surveiller la sécurité et les performances réseau, Gérer les comptes utilisateurs et les accès, Documenter les incidents et interventions, Assister les utilisateurs en support technique.', 'Réseaux informatiques, maintenance, support technique, sécurité, organisation, réactivité.', 'Durée indéterminé '),
 (4, 'Alternance Développeur Mobile', 4, 4, 16, 'Développement d\'applications.', 2, 'Développer des applications mobiles (Android / iOS / Flutter / React Native), Implémenter des fonctionnalités front-end et back-end, Tester et corriger les anomalies, Participer à la conception technique de l’application, Optimiser l’expérience utilisateur (UX), Publier et maintenir les applications sur les stores.', 'Programmation mobile, Android/iOS, bases en code, curiosité, autonomie, travail en équipe.', '5 mois'),
 (5, 'Chef de Projet Digital', 2, 2, 9, 'Pilotage de projets digitaux.', 2, 'Piloter des projets web et digitaux de A à Z, Rédiger les cahiers des charges, Coordonner les équipes (développeurs, designers, marketing), Suivre les délais, budgets et livrables, Analyser les performances des projets, Assurer la relation client et le reporting.', 'Gestion de projet, organisation, coordination, communication, outils digitaux, leadership.', 'Durée indéterminé '),
 (6, 'Stage Comptabilité', 3, 3, 30, 'Stage de 3 mois.', 2, 'Saisir et classer les pièces comptables, Participer à la gestion de la facturation, Aider aux rapprochements bancaires, Contribuer à la préparation des bilans, Mettre à jour les tableaux de suivi financier, Assister aux déclarations fiscales et sociales.', 'Saisie comptable, rigueur, organisation, bases comptables, confidentialité, chiffres.', '3 à 5 mois.');
@@ -146,7 +146,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`Id`, `Nom`, `Prenom`, `Email`, `Password`) VALUES
 (1, 'Toto', 'Toto', 'toto.titi@exemple.com', 'azerty'),
 (2, 'abdallah', 'oumair', 'oumairabdallah@gmail.com', 'azerty'),
-(3, 'abdallah', 'oumair', 'o.abdallah194', 'azerty');
+(3, 'abdallah', 'oumair1', 'o.abdallah194@gmai.com', 'azerty');
 
 -- --------------------------------------------------------
 
