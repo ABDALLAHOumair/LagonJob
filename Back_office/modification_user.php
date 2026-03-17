@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de bord</title>
+    <title>Modification Utilisateur</title>
     <link rel="stylesheet" href="../Frontoffice/style.css">
 </head>
 <body>
@@ -26,7 +26,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
             <button class="btn-retour" onclick="history.back()">
                 <span class="fleche"></span>
                 Retour
-            </button>  
+            </button>   
         </div>
         <form class="form" action="submit_modification_user.php" method="post">
             <div class="stack">
@@ -78,16 +78,16 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 
         </form>
     </main>
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+            © 2025 LagonJobs - Tous droits réservés
+            </div>
+            <div>
+            <a href="">Confidentialité</a> &nbsp; | &nbsp;
+            <a href="contact.php">Nous contacter</a>
+            </div>
+        </div>
+    </footer>
 </body>
-<footer class="site-footer">
-    <div class="container footer-inner">
-        <div>
-        © 2025 LagonJobs - Tous droits réservés
-        </div>
-        <div>
-        <a href="">Confidentialité</a> &nbsp; | &nbsp;
-        <a href="contact.php">Nous contacter</a>
-        </div>
-    </div>
-</footer>
 </html>

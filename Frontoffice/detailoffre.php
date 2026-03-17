@@ -74,7 +74,7 @@ require_once(__DIR__ . '/fonctions.php');
                                     if ($postulation['Id_offre'] == $_POST['id_offre'] && $postulation['Status'] == true) {
                                         $postuler = true; ?>
                                     <!-- Formulaire pour postuler -->
-                                    <form action="submit_annulattion.php" method="post">
+                                    <form action="annuler_postulation.php" method="post">
                                         <input type="hidden" name="id_offre" value="<?php echo $postulation['Id_offre']; ?>">
                                         <input type="hidden" name="id_user" value="<?php echo $postulation['Id_user']; ?>">
                                         <input type="hidden" name="id_postulation" value="<?php echo $postulation['Id']; ?>">

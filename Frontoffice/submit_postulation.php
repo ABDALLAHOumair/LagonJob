@@ -20,6 +20,6 @@ if (isset($_POST['id_offre'])
         
     }
 if($_GET['type'] === 'Non'){
-        redirectToUrl('offres.php');
-    }
+    redirectToUrl('offres.php');
+}
 ?>

@@ -88,16 +88,15 @@ require_once(__DIR__ . '/connexionBDD.php');
         </div>
     </main>
 </body>
-<footer class="site-footer footer-inner">
-    <div>
-        <p>© 2025 LagonJob - Tous droits réservés</p>
-    </div>
-    <nav class="nav">
-        <div> 
-            <a>Confidentialité</a>
-            <a>Conditions</a>
-            <a href="contact.php">Nous contacter</a>
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <div>
+        © 2025 LagonJobs - Tous droits réservés
         </div>
-    </nav>
+        <div>
+        <a href="">Confidentialité</a> &nbsp; | &nbsp;
+        <a href="contact.php">Nous contacter</a>
+        </div>
+    </div>
 </footer>
 </html>
