@@ -81,7 +81,6 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                         <input type="hidden" name="type_travail" value="<?php echo $listeOffre[$i]['Nom_type_contrat']?>">
                                         <input type="hidden" name="mode_travail" value="<?php echo $listeOffre[$i]['Nom_mode_travail']?>">
                                         <input type="hidden" name="ville" value="<?php echo $listeOffre[$i]['Nom_ville']?>">
-                                        <input type="hidden" name="description" value="<?php echo $listeOffre[$i]['Description']?>">
                                         <button type="submit" class="btn">Modifier</button>
                                     </form> 
                                     <form action="suppression_offre.php" method="post">

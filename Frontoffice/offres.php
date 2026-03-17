@@ -138,7 +138,7 @@ session_start();
                         
                         <!-- Formulaire avec ID caché -->
                         <form action="detailoffre.php" method="post" style="margin-top:10px;">
-                            <input type="hidden" name="id" value="<?php echo $offre['Id']; ?>">
+                            <input type="hidden" name="id_offre" value="<?php echo $offre['Id']; ?>">
                             <button type="submit" class="btn">Voir détails</button>
                         </form>
                     </div>

@@ -37,6 +37,12 @@ $selection_statut=$mysqlClient->prepare($selectstatut);
 $selection_statut->execute();
 $listestatut=$selection_statut->fetchAll();
 
+//Selction des postulations
+$selectpostulation='SELECT * FROM postulations';
+$selection_postulation=$mysqlClient->prepare($selectpostulation);
+$selection_postulation->execute();
+$listepostulation=$selection_postulation->fetchAll();
+
 $selectOffre='SELECT of.Id, of.Titre, of.Description, tc.Nom_type_contrat, mt.Nom_mode_travail, vl.Nom_ville, st.Statut, of.Mission, of.Profile, of.Duree FROM offres of
 JOIN types_contrats tc ON of.Id_type_contrat = tc.Id
 JOIN modes_travails mt ON of.Id_mode_travail = mt.Id

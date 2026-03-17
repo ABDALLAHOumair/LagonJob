@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once(__DIR__ . '/fonctions.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,8 +18,8 @@ session_start();
     require_once(__DIR__ . '/connexionBDD.php');
 
     // Vérifier si l'ID a été envoyé en POST
-    if (!empty($_POST['id'])) {
-        $id = $_POST['id'];
+    if (!empty($_POST['id_offre'])) {
+        $id = $_POST['id_offre'];
         
         // Requête pour récupérer l'offre complète
         $sql = "SELECT o.Id, o.Titre, o.Description, 
@@ -56,23 +57,46 @@ session_start();
                     <div class="">
                         <h3>Description du poste</h3>
                         <p><?php echo $offre['Description']; ?></p>
-                    </div>
-                    <p><strong>Mission : </strong><?php echo $offre['mission']; ?></p>
-                    <p><strong>Profile : </strong><?php echo $offre['profile']; ?></p>
+                    </div><br>  
+                    <p><strong>Mission : </strong><?php echo $offre['mission']; ?></p><br>
+                    <p><strong>Profile : </strong><?php echo $offre['profile']; ?></p><br>
                     <div style="margin-top: 20px; display: flex; gap: 10px;">
-                        <?php if (isset($_SESSION['LOGGED_USER'])): ?>
-                            <!-- Formulaire pour postuler -->
-                            <form action="postuler.php" method="post">
-                                <input type="hidden" name="id_offre" value="<?php echo $offre['Id']; ?>">
-                                <button type="submit" class="btn">Postuler à cette offre</button>
-                            </form>
-                        <?php else: ?>
+                        <?php if (isset($_SESSION['LOGGED_USER'])){
+                                $postuler =  false; 
+                                $SelectTargget='SELECT Id, Id_user, Id_offre, Status FROM postulations WHERE Id_user =:Id_user';
+                                $Targget=$mysqlClient->prepare($SelectTargget);
+                                $Targget->execute([
+                                    'Id_user' => $_SESSION['LOGGED_USER']['user_id'],
+                                ]);
+                                $postulations=$Targget->fetchAll();
+                               
+                                foreach ($postulations as $postulation) {
+                                    if ($postulation['Id_offre'] == $_POST['id_offre'] && $postulation['Status'] == true) {
+                                        $postuler = true; ?>
+                                    <!-- Formulaire pour postuler -->
+                                    <form action="submit_annulattion.php" method="post">
+                                        <input type="hidden" name="id_offre" value="<?php echo $postulation['Id_offre']; ?>">
+                                        <input type="hidden" name="id_user" value="<?php echo $postulation['Id_user']; ?>">
+                                        <input type="hidden" name="id_postulation" value="<?php echo $postulation['Id']; ?>">
+                                        <button type="submit" style="background:#E6E6E6; color:#616161; padding:.7rem 1rem; border-radius:10px; display:inline-block; font-weight:600; border:2px solid #E6E6E6; transition:all .2s ease;">Annuler la postulation</button>
+                                    </form>
+                                <?php }}
+                                if (!$postuler) { ?>
+                                    <form action="confirme_postulation.php" method="post">
+                                        <input type="hidden" name="id_offre" value="<?php echo $_POST['id_offre']; ?>">
+                                        <input type="hidden" name="id_user" value="<?php echo $_SESSION['LOGGED_USER']['user_id']; ?>">
+                                        <button type="submit" class="btn">Postuler à cette offre</button>
+                                    </form>
+                                <?php
+                                }
+                            } 
+                            else { ?>
                             <button type="button" class="btn" onclick="window.location.href='connexion.php'">Connectez-vous pour postuler</button>
-                        <?php endif; ?>
+                        <?php } ;?>
                         
                         <!-- Formulaire pour retour à la liste -->
                         <form action="offres.php" method="get">
-                            <button type="submit" class="btn">Retour aux offres</button>
+                            <button type="submit" class="btn">Voir les offres</button>
                         </form>
                     </div>
                 </div>

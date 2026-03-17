@@ -77,7 +77,7 @@ require_once(__DIR__ . '/connexionBDD.php');
                                 <p><?php echo $listeOffre[$i]['Nom_ville'].' - '. $listeOffre[$i]['Nom_mode_travail'] ?></p><br>
                                 <p><?php echo $listeOffre[$i]['Description'] ?></p><br>
                                 <form action="detailoffre.php" method="post">
-                                    <input type="hidden" name="id" value="<?php echo $listeOffre[$i]['Id']?>">
+                                    <input type="hidden" name="id_offre" value="<?php echo $listeOffre[$i]['Id']?>">
                                     <button type="submit" class="btn">voir</button>
                                 </form> 
                             </article>

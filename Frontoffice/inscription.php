@@ -16,7 +16,7 @@ require_once(__DIR__. "/connexionBDD.php")
     <main class="hero">
         <div class="center">
             <h1>Inscription</h1>
-            <form action="submit_inscription.php" method="get" class="form auth-card">
+            <form action="submit_inscription.php" method="post" class="form auth-card">
                 <div class="stack">
                     <div class="row">
                         <div>
@@ -41,7 +41,7 @@ require_once(__DIR__. "/connexionBDD.php")
                         </div>
                         <div> 
                             <label for="confirmer">Confirmer</label>
-                            <input type="textarea" id="confirmer" name="confirmer">
+                            <input type="password" id="confirmer" name="confirmer">
                         </div>
                     </div>
                     <?php 
