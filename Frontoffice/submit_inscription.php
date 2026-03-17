@@ -35,7 +35,7 @@ if (isset($_POST['email'])
                 $insertUser=$mysqlClient->prepare($insertUser);
                 $insertUser->execute([
                     'Email' => $_POST['email'],
-                    'Password' => $_POST['password'],
+                    'Password' =>password_hash($_POST['password'], PASSWORD_DEFAULT),
                     'Nom' => $_POST['nom'],
                     'Prenom' => $_POST['prenom'],
                 ]);
