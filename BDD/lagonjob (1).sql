@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 12 mars 2026 à 09:45
+-- Généré le : mer. 18 mars 2026 à 05:57
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -82,8 +82,15 @@ CREATE TABLE `postulations` (
   `Id` int(11) NOT NULL,
   `Id_user` int(11) NOT NULL,
   `Id_offre` int(11) NOT NULL,
-  `status` varchar(128) NOT NULL
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `postulations`
+--
+
+INSERT INTO `postulations` (`Id`, `Id_user`, `Id_offre`, `status`) VALUES
+(1, 5, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -144,9 +151,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`Id`, `Nom`, `Prenom`, `Email`, `Password`) VALUES
-(1, 'Toto', 'Toto', 'toto.titi@exemple.com', 'azerty'),
+(1, 'Toto10', 'Toto', 'toto.titi@exemple.com', 'azerty'),
 (2, 'abdallah', 'oumair', 'oumairabdallah@gmail.com', 'azerty'),
-(3, 'abdallah', 'oumair1', 'o.abdallah194@gmai.com', 'azerty');
+(3, 'abdallah', 'oumair1', 'o.abdallah194@gmai.com', 'azerty'),
+(5, 'doudou', 'dada', 'doudoudada@gmail.com', 'azerty'),
+(11, 'Toto', 'Toto', 'oumairabdallah@gmail.com', 'azerty'),
+(12, 'Toto', 'Toto', 'oumairabdallah@gmail.com', 'azerty'),
+(13, 'Toto', 'Toto', 'oumairabdallah@gmail.com', 'azerty'),
+(14, 'Toto', 'Toto', 'oumairabdallah@gmail.com', 'azerty');
 
 -- --------------------------------------------------------
 
@@ -298,7 +310,7 @@ ALTER TABLE `offres`
 -- AUTO_INCREMENT pour la table `postulations`
 --
 ALTER TABLE `postulations`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `statuts`
@@ -316,7 +328,7 @@ ALTER TABLE `types_contrats`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `villes`

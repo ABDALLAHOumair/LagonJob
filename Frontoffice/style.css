@@ -86,7 +86,7 @@ a:hover{color:var(--lagon)}
 .meta{color:var(--text-2); font-size:.95rem}
 .badge{display:inline-block; font-size:.8rem; background:#eaf6fa; color:var(--lagon-dark); padding:.25rem .5rem; border-radius:999px; margin-right:.35rem}
 
-.site-footer{background:#1f2326; color:#b8c2c7}
+.site-footer{background:#1f2326; color:#b8c2c7; margin-top: 40px;}
 .footer-inner{display:flex; justify-content:space-between; align-items:center; padding:1.2rem 0}
 .footer-inner a{color:#dbe5ea}
 
