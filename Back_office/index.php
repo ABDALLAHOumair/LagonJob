@@ -23,78 +23,119 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
     <main class="hero">
         <div class="container">
             <div class="">
-                <form class="form" action="offre.php" method="post">
+                <form class="form" action="index.php" method="post">
                     <h1>Gestion des emplois</h1>
-                        <div class="filter-bar">
-                            <div>
-                                <label for="ajouter">+Ajouter</label>
-                                <input name="ajouter">
-                            </div>
-                            <div>
-                                <label for="status">Statuts</label>
-                                <select name="status">
-                                    <option value="">Statut</option>
-                                    <option value="publiée">publiée</option>
-                                    <option value="non publiée">non publiée</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="categorie">Catégorie</label>
-                                <select name="categorie">
-                                    <option value="">Ville</option>
-                                    <option value="Mamoudzou">Mamoudzou</option>
-                                    <option value="Dzaoudzi">Dzaoudzi</option>
-                                    <option value="Koungou">Koungou</option>
-                                </select>
-                            </div>
+                    <div class="filter-bar">
+                        <div>
+                            <label for="statut">Statut</label>
+                            <select name="statut">
+                                <option value="">Tous les statuts</option>
+                                <option value="1">Non publiée</option>
+                                <option value="2">Publiée</option>
+                            </select>
                         </div>
                         <div>
-                            <button type="submit" class="btn">Filtrer</button>
-                            <button type="button" class="btn btn-outline" onclick="window.location.href='index.php'">Réinitialiser</button>
+                            <label for="type">Type de contrat</label>
+                            <select name="type">
+                                <option value="">Tous les types</option>
+                                <option value="1">CDD</option>
+                                <option value="2">CDI</option>
+                                <option value="3">Stage</option>
+                                <option value="4">Alternance</option>
+                            </select>
                         </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn">Filtrer</button>
+                        <button type="button" class="btn btn-outline" onclick="window.location.href='index.php'">Réinitialiser</button>
+                        <button type="button" class="btn" onclick="window.location.href='ajouter_offre.php'">+ Ajouter</button>
+                    </div>
                 </form>
             </div>
+
+            <?php
+            // ========================================
+            // FILTRAGE DES OFFRES
+            // ========================================
+            
+            // On commence avec toutes les offres
+            $offres_filtrees = $listeOffre;
+
+            // Filtre par statut
+            // Si l'utilisateur a choisi un statut dans le formulaire
+            if (!empty($_POST['statut'])) {
+                // On récupère l'ID du statut choisi
+                $statut_id = $_POST['statut'];
+                
+                // On garde seulement les offres qui ont ce statut
+                // array_filter() parcourt le tableau et garde uniquement les éléments qui respectent la condition
+                $offres_filtrees = array_filter($offres_filtrees, function($offre) use ($statut_id) {
+                    // On compare l'ID du statut de l'offre avec celui choisi
+                    return $offre['Id_statut'] == $statut_id;
+                });
+            }
+
+            // Filtre par type de contrat
+            // Si l'utilisateur a choisi un type dans le formulaire
+            if (!empty($_POST['type'])) {
+                // On récupère l'ID du type choisi
+                $type_id = $_POST['type'];
+                
+                // On garde seulement les offres qui ont ce type
+                $offres_filtrees = array_filter($offres_filtrees, function($offre) use ($type_id) {
+                    // On compare l'ID du type de l'offre avec celui choisi
+                    return $offre['Id_type_contrat'] == $type_id;
+                });
+            }
+            ?>
+
             <div>
                 <table class="table-offres">
                     <tr class=""> 
                         <th>Titre</th>
                         <th>Statut</th>
-                        <th>Catégorie</th>
-                        <th>actions</th>
+                        <th>Type de contrat</th>
+                        <th>Ville</th>
+                        <th>Actions</th>
                     </tr>
                 
-                        <?php for ($i=0; $i < count($listeOffre) ; $i++) { ?>
-                            <tr>
-                                <td>
-                                    <?php echo $listeOffre[$i]['Titre'] ?>
-                                </td>
-                                <td>
-                                <?php echo $listeOffre[$i]['Statut'] ?>
-                                </td>
-                                <td>
-                                    <?php echo $listeOffre[$i]['Nom_type_contrat'] ?>
-                                </td>
-                                <td>
-                                    <form action="modification_offre.php" method="post">
-                                        <input type="hidden" name="id_offre" value="<?php echo $listeOffre[$i]['Id']?>">
-                                        <input type="hidden" name="statut" value="<?php echo $listeOffre[$i]['Statut']?>">
-                                        <input type="hidden" name="type_travail" value="<?php echo $listeOffre[$i]['Nom_type_contrat']?>">
-                                        <input type="hidden" name="mode_travail" value="<?php echo $listeOffre[$i]['Nom_mode_travail']?>">
-                                        <input type="hidden" name="ville" value="<?php echo $listeOffre[$i]['Nom_ville']?>">
-                                        <button type="submit" class="btn">Modifier</button>
-                                    </form> 
-                                    <form action="suppression_offre.php" method="post">
-                                        <input type="hidden" name="id_offre" value="<?php echo $listeOffre[$i]['Id']?>">
-                                        <input type="hidden" name="statut" value="<?php echo $listeOffre[$i]['Statut']?>">
-                                        <input type="hidden" name="type_travail" value="<?php echo $listeOffre[$i]['Nom_type_contrat']?>">
-                                        <input type="hidden" name="mode_travail" value="<?php echo $listeOffre[$i]['Nom_mode_travail']?>">
-                                        <input type="hidden" name="ville" value="<?php echo $listeOffre[$i]['Nom_ville']?>">
-                                        <input type="hidden" name="description" value="<?php echo $listeOffre[$i]['Description']?>">
-                                        <button type="submit" class="btn">Supprimer</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php } ?>
+                    <?php foreach ($offres_filtrees as $offre): ?>
+                        <tr>
+                            <td><?php echo $offre['Titre'] ?></td>
+                            <td><?php echo $offre['Statut'] ?></td>
+                            <td><?php echo $offre['Nom_type_contrat'] ?></td>
+                            <td><?php echo $offre['Nom_ville'] ?></td>
+                            <td>
+                                <!-- Bouton Voir -->
+                                <form action="detailoffreBE.php" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="<?php echo $offre['Id']?>">
+                                    <button type="submit" class="btn">Voir</button>
+                                </form>
+
+                                <!-- Bouton Modifier -->
+                                <form action="modification_offre.php" method="post" style="display:inline;">
+                                    <input type="hidden" name="id_offre" value="<?php echo $offre['Id']?>">
+                                    <input type="hidden" name="statut" value="<?php echo $offre['Statut']?>">
+                                    <input type="hidden" name="type_travail" value="<?php echo $offre['Nom_type_contrat']?>">
+                                    <input type="hidden" name="mode_travail" value="<?php echo $offre['Nom_mode_travail']?>">
+                                    <input type="hidden" name="ville" value="<?php echo $offre['Nom_ville']?>">
+                                    <input type="hidden" name="description" value="<?php echo $offre['Description']?>">
+                                    <button type="submit" class="btn">Modifier</button>
+                                </form> 
+
+                                <!-- Bouton Supprimer -->
+                                <form action="suppression_offre.php" method="post" style="display:inline;">
+                                    <input type="hidden" name="id_offre" value="<?php echo $offre['Id']?>">
+                                    <input type="hidden" name="statut" value="<?php echo $offre['Statut']?>">
+                                    <input type="hidden" name="type_travail" value="<?php echo $offre['Nom_type_contrat']?>">
+                                    <input type="hidden" name="mode_travail" value="<?php echo $offre['Nom_mode_travail']?>">
+                                    <input type="hidden" name="ville" value="<?php echo $offre['Nom_ville']?>">
+                                    <input type="hidden" name="description" value="<?php echo $offre['Description']?>">
+                                    <button type="submit" class="btn">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                     
                 </table>
             </div>
