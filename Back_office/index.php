@@ -30,18 +30,18 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                             <label for="statut">Statut</label>
                             <select name="statut">
                                 <option value="">Tous les statuts</option>
-                                <option value="1">Non publiée</option>
-                                <option value="2">Publiée</option>
+                                <option value="1" <?php if(isset($_POST['statut']) && $_POST['statut']=='1') echo 'selected'; ?>>Non publiée</option>
+                                <option value="2" <?php if(isset($_POST['statut']) && $_POST['statut']=='2') echo 'selected'; ?>>Publiée</option>
                             </select>
                         </div>
                         <div>
                             <label for="type">Type de contrat</label>
                             <select name="type">
                                 <option value="">Tous les types</option>
-                                <option value="1">CDD</option>
-                                <option value="2">CDI</option>
-                                <option value="3">Stage</option>
-                                <option value="4">Alternance</option>
+                                <option value="1" <?php if(isset($_POST['type']) && $_POST['type']=='1') echo 'selected'; ?>>CDD</option>
+                                <option value="2" <?php if(isset($_POST['type']) && $_POST['type']=='2') echo 'selected'; ?>>CDI</option>
+                                <option value="3" <?php if(isset($_POST['type']) && $_POST['type']=='3') echo 'selected'; ?>>Stage</option>
+                                <option value="4" <?php if(isset($_POST['type']) && $_POST['type']=='4') echo 'selected'; ?>>Alternance</option>
                             </select>
                         </div>
                     </div>
