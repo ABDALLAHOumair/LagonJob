@@ -47,7 +47,8 @@ $selectOffre='SELECT of.Id, of.Titre, of.Description, tc.Nom_type_contrat, mt.No
 JOIN types_contrats tc ON of.Id_type_contrat = tc.Id
 JOIN modes_travails mt ON of.Id_mode_travail = mt.Id
 JOIN statuts st ON of.Id_statut = st.Id
-JOIN villes vl ON of.Id_ville = vl.Id';
+JOIN villes vl ON of.Id_ville = vl.Id
+ORDER BY Id desc';
 $selection_Offre=$mysqlClient->prepare($selectOffre);
 $selection_Offre->execute();
 $listeOffre=$selection_Offre->fetchAll();

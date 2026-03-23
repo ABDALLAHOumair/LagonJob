@@ -19,7 +19,7 @@ if (isset($_POST['email'])
             'Email' => $_POST['email'],
         ]);
         $User=$UserTargget->fetchAll();
-
+        if (count($User)>0) {    
             if ($User[0]['Email'] == $_POST['email']) {
                 $_SESSION['Error_message_email'] =
                 "L'email saisie est déjà utilisé.";
@@ -31,18 +31,33 @@ if (isset($_POST['email'])
                 die(redirectToUrl('inscription.php'));
             }
             else{
-                $insertUser='INSERT INTO user(Email, Password, Nom, Prenom) VALUE(:Email, :Password, :Nom, :Prenom)';
+                $insertUser='INSERT INTO user(Email, Password, Nom, Prenom, Id_role) VALUE(:Email, :Password, :Nom, :Prenom, :Role)';
                 $insertUser=$mysqlClient->prepare($insertUser);
                 $insertUser->execute([
                     'Email' => $_POST['email'],
                     'Password' =>password_hash($_POST['password'], PASSWORD_DEFAULT),
                     'Nom' => $_POST['nom'],
                     'Prenom' => $_POST['prenom'],
+                    'Role' => 2,
                 ]);
 
                 die(redirectToUrl('index.php'));
             }
         }
+        else{
+            $insertUser='INSERT INTO user(Email, Password, Nom, Prenom, Id_role) VALUE(:Email, :Password, :Nom, :Prenom, :Role)';
+            $insertUser=$mysqlClient->prepare($insertUser);
+            $insertUser->execute([
+                'Email' => $_POST['email'],
+                'Password' =>password_hash($_POST['password'], PASSWORD_DEFAULT),
+                'Nom' => $_POST['nom'],
+                'Prenom' => $_POST['prenom'],
+                'Role' => 2,
+            ]);
+
+            die(redirectToUrl('index.php'));
+        }
+    }
 
 else{
     $_SESSION['Error_message_inscription']=
