@@ -8,7 +8,8 @@ function redirectToUrl(string $url): never
 }
 
 //Selection des utilisateurs
-$selectUser='SELECT * FROM user';
+$selectUser='SELECT us.Id, us.Nom, us.Prenom, us.Email, us.Password, us.Id_role, ro.Role FROM user us
+JOIN roles ro ON us.Id_role=ro.Id';
 $selection_User=$mysqlClient->prepare($selectUser);
 $selection_User->execute();
 $listeUser=$selection_User->fetchAll();
@@ -37,6 +38,12 @@ $selection_statut=$mysqlClient->prepare($selectstatut);
 $selection_statut->execute();
 $listestatut=$selection_statut->fetchAll();
 
+//Selction des Roles
+$selectrole='SELECT * FROM roles';
+$selection_role=$mysqlClient->prepare($selectrole);
+$selection_role->execute();
+$listerole=$selection_role->fetchAll();
+
 //Selction des postulations
 $selectpostulation='SELECT * FROM postulations';
 $selection_postulation=$mysqlClient->prepare($selectpostulation);
@@ -48,7 +55,7 @@ JOIN types_contrats tc ON of.Id_type_contrat = tc.Id
 JOIN modes_travails mt ON of.Id_mode_travail = mt.Id
 JOIN statuts st ON of.Id_statut = st.Id
 JOIN villes vl ON of.Id_ville = vl.Id
-ORDER BY Id desc';
+ORDER BY st.Id asc';
 $selection_Offre=$mysqlClient->prepare($selectOffre);
 $selection_Offre->execute();
 $listeOffre=$selection_Offre->fetchAll();

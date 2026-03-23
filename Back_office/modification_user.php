@@ -39,12 +39,12 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                 <div class="row">
                     <div>
                         <label for="nom">Nom</label>
-                            <input type="text" id="nom" name="nom" 
-                            value="<?php foreach ($listeUser as $user) {
-                                if ($user['Id'] == $_POST['id_user']) {
-                                    echo $user['Nom']; 
-                                }
-                            } ?>">
+                        <input type="text" id="nom" name="nom" 
+                        value="<?php foreach ($listeUser as $user) {
+                            if ($user['Id'] == $_POST['id_user']) {
+                                echo $user['Nom']; 
+                            }
+                        } ?>">
                     </div>
 
                     <div>
@@ -66,18 +66,20 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                 }
                             } ?>">
                     </div>
-
                     <div>
-                        <label for="password">Mot de passe</label>
-                            <input type="text" id="password" name="password" 
-                            value="<?php foreach ($listeUser as $user) {
-                                if ($user['Id'] == $_POST['id_user']) {
-                                    echo $user['Password']; 
-                                }
-                            } ?>">
+                        <label for="role">Rôle</label>
+                        <select name="role" class="card">
+                           <?php for ($i=0; $i < count($listerole) ; $i++) {?> 
+                                <option value="<?php echo $listerole[$i]['Id']?>" 
+                                <?php if ($listerole[$i]['Role']==$_POST['role']){?>selected<?php }?>>
+                                    <?php echo $listerole[$i]['Role']?>
+                                </option>
+                            <?php } ?>
+                        </select>
                     </div>
-                <input type="hidden" name="id_user" value="<?php echo $_POST['id_user']?>">
-                <div class="actions">
+                </div>
+                <div class="">
+                    <input type="hidden" name="id_user" value="<?php echo $_POST['id_user']?>">
                     <button class="btn" type="submit">Modifier</button>
                 </div>
             </div>

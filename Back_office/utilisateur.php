@@ -44,6 +44,14 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                             <label for="email">Email</label>
                             <input name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
                         </div>
+                        <div>
+                            <label for="role">Statut</label>
+                            <select name="role">
+                                <option value="">Tous les roles</option>
+                                <option value="1" <?php if(isset($_POST['role']) && $_POST['role']=='1') echo 'selected'; ?>>Admin</option>
+                                <option value="2" <?php if(isset($_POST['role']) && $_POST['role']=='2') echo 'selected'; ?>>Utilisateur</option>
+                            </select>
+                        </div>
                     </div>
                     <div>
                         <button type="submit" class="btn">Filtrer</button>
@@ -90,6 +98,18 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                     return $user['Email'] == $_POST['email'];
                 });
             }
+            // Filtre par role
+            // Si l'utilisateur selectionne un role dans le formulaire
+            if (!empty($_POST['role'])) {
+                // On récupère l'ID du type choisi
+                $role_id = $_POST['role'];
+
+                // On garde seulement les utilisateurs dont l'email correspond exactement
+                $users_filtres = array_filter($users_filtres, function($user) use ($role_id){
+                    // On compare l'email de l'utilisateur avec ce qui a été tapé
+                    return $user['Id_role'] == $role_id;
+                });
+            }
             ?>
 
             <div>
@@ -98,6 +118,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Email</th>
+                        <th>Rôle</th>
                         <th>Action</th>
                     </tr>
                 
@@ -106,7 +127,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                             <td><?php echo $user['Nom'] ?></td>
                             <td><?php echo $user['Prenom'] ?></td>
                             <td><?php echo $user['Email'] ?></td>
-                            <td><?php echo $user['Password'] ?></td>
+                            <td><?php echo $user['Role'] ?></td>
                             <td>
                                 <!-- Bouton Modifier -->
                                 <form action="modification_user.php" method="post" style="display:inline;">
@@ -114,7 +135,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                     <input type="hidden" name="nom" value="<?php echo $user['Nom']?>">
                                     <input type="hidden" name="prenom" value="<?php echo $user['Prenom']?>">
                                     <input type="hidden" name="email" value="<?php echo $user['Email']?>">
-                                    <input type="hidden" name="password" value="<?php echo $user['Password']?>">
+                                    <input type="hidden" name="role" value="<?php echo $user['Role']?>">
                                     <button type="submit" class="btn">Modifier</button>
                                 </form> 
 
@@ -124,7 +145,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                     <input type="hidden" name="nom" value="<?php echo $user['Nom']?>">
                                     <input type="hidden" name="prenom" value="<?php echo $user['Prenom']?>">
                                     <input type="hidden" name="email" value="<?php echo $user['Email']?>">
-                                    <input type="hidden" name="password" value="<?php echo $user['Password']?>">
+                                    <input type="hidden" name="role" value="<?php echo $user['Role']?>">
                                     <button type="submit" class="btn">Supprimer</button>
                                 </form>
                             </td>
