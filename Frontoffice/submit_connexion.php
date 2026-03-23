@@ -12,32 +12,37 @@ if (isset($postData['email']) &&  isset($postData['password'])) {
     } 
 
     else {
-        $RequeteUserTargget='SELECT Id, Email, Password FROM user WHERE Email =:Email AND Password =:Password';
+        $RequeteUserTargget='SELECT Id, Email, Password, Id_role FROM user WHERE Email =:Email';
         $UserTargget=$mysqlClient->prepare($RequeteUserTargget);
         $UserTargget->execute([
             'Email' => $postData['email'],
-            'Password' => $postData['password'],
         ]);
         $User=$UserTargget->fetchAll();
             if (
-                $User[0]['Email'] === $postData['email'] &&
-                $User[0]['Password'] === $postData['password']
+                $User[0]['Email'] === $postData['email'] && password_verify($postData['password'], $User[0]['Password']) && $User[0]['Id_role'] == 2 
             ) {
                 $_SESSION['LOGGED_USER'] = [
                     'email' => $User[0]['Email'],
                     'user_id' => $User[0]['Id'],
                 ];
+                die(redirectToUrl('index.php'));
+            }
+            if (
+                $User[0]['Email'] === $postData['email'] && password_verify($postData['password'], $User[0]['Password']) && $User[0]['Id_role'] == 1
+            ) {
+                $_SESSION['LOGGED_ADMIN'] = [
+                    'email' => $User[0]['Email'],
+                    'user_id' => $User[0]['Id'],
+                ];
+                die(redirectToUrl('../Back_office/index.php'));
+            }
+            else {
+                $_SESSION['LOGIN_ERROR_MESSAGE'] =  "L'email ou le mot de passe est incorrect.";
+                die(redirectToUrl('connexion.php'));
             }
         }
 
-    if (!isset($_SESSION['LOGGED_USER'])) {
-        $_SESSION['LOGIN_ERROR_MESSAGE'] = sprintf( 
-            "L'email ou le mot de passe est incorrect.",
-            $postData['email'],
-            strip_tags($postData['password'])
-        );
-        die(redirectToUrl('connexion.php'));
-    }
+
 
     redirectToUrl('index.php');
 }

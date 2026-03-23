@@ -15,7 +15,7 @@ if (isset($_POST['id_offre'])
                 'Id_offre' => $_POST['id_offre'],
                 'Status' => 1,
             ]);
-            die(redirectToUrl('index.php'));      
+            die(redirectToUrl('offres.php'));      
         }
         
     }

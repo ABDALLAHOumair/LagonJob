@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!$_SESSION['LOGGED_ADMIN']) {
+    header("Location: ../Frontoffice/connexion.php");
+exit;
+}
 require_once(__DIR__ . '/../Frontoffice/fonctions.php');
 require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 ?>
@@ -18,6 +23,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
             <a href="utilisateur.php">Utilisateurs</a>
             <a href="offre.php">Offres</a>
             <a href="contact.php">Contact</a>
+            <button class="btn btn-outline" onclick="window.location.href='deconnexionBE.php'">Deconnexion</button>
         </nav>
     </header>
     <main class="hero">
@@ -51,7 +57,6 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                         <th>Nom</th>
                         <th>Prenom</th>
                         <th>Email</th>
-                        <th>Mot de passe</th>
                         <th>Action</th>
                     </tr>
                 
@@ -65,9 +70,6 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                 </td>
                                 <td>
                                     <?php echo $listeUser[$i]['Email'] ?>
-                                </td>
-                                <td>
-                                    <?php echo $listeUser[$i]['Password'] ?>
                                 </td>
                                 <td>
                                     <form action="modification_user.php" method="post">

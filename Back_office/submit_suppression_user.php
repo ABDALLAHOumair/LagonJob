@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!$_SESSION['LOGGED_ADMIN']) {
+    header("Location: ../Frontoffice/connexion.php");
+exit;
+}
 require_once(__DIR__ . '/../Frontoffice/fonctions.php');
 require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 

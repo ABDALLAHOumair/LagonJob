@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!$_SESSION['LOGGED_ADMIN']) {
+    header("Location: ../Frontoffice/connexion.php");
+exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +21,7 @@
             <a href="utilisateur.php">Utilisateurs</a>
             <a href="offre.php">Offres</a>
             <a href="contact.php">Contact</a>
+            <button class="btn btn-outline" onclick="window.location.href='deconnexionBE.php'">Deconnexion</button>
         </nav>
     </header>
     <section class="section">
