@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 18 mars 2026 à 05:57
+-- Généré le : mar. 24 mars 2026 à 16:30
 -- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.0.30
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,11 +65,11 @@ CREATE TABLE `offres` (
 --
 
 INSERT INTO `offres` (`Id`, `Titre`, `Id_type_contrat`, `Id_mode_travail`, `Id_ville`, `Description`, `Id_statut`, `Mission`, `Profile`, `Duree`) VALUES
-(1, 'Développeur Web Junior', 1, 4, 20, 'Rejoignez notre équipe dynamique.', 2, 'Développer et maintenir des sites web (HTML, CSS, JavaScript), Intégrer des maquettes UI/UX (Figma, Adobe XD), Corriger des bugs et améliorer les performances, Participer à l’optimisation SEO technique, Collaborer avec, l’équipe design et back-end\r\n\r\nRédiger une documentation technique simple', 'Motivation, HTML/CSS, bases JavaScript, apprentissage rapide, travail en équipe, rigueur.', '6 mois'),
-(2, 'Stage Assistant Marketing', 3, 3, 27, 'Stage de 6 mois.', 2, 'Participer à la création de contenus (réseaux sociaux, newsletters, blogs), Aider à la gestion des campagnes marketing digitales, Réaliser des études de marché et analyses de concurrence, Mettre à jour le site web et les supports commerciauxSuivre les indicateurs de performance (KPI), Assister à l’organisation d’événements ou de promotions', 'Créativité, communication, réseaux sociaux, marketing digital, organisation, esprit d’équipe.', '3 à 5 mois.'),
-(3, 'Technicien Réseau', 1, 2, 35, 'Installation et maintenance.', 2, 'Installer et configurer les équipements réseau (routeurs, switches), Assurer la maintenance et le dépannage du réseau, Surveiller la sécurité et les performances réseau, Gérer les comptes utilisateurs et les accès, Documenter les incidents et interventions, Assister les utilisateurs en support technique.', 'Réseaux informatiques, maintenance, support technique, sécurité, organisation, réactivité.', 'Durée indéterminé '),
+(1, 'Développeur Web Junior', 1, 4, 20, 'Rejoignez notre équipe dynamique.', 1, 'Développer et maintenir des sites web (HTML, CSS, JavaScript), Intégrer des maquettes UI/UX (Figma, Adobe XD), Corriger des bugs et améliorer les performances, Participer à l’optimisation SEO technique, Collaborer avec, l’équipe design et back-end\r\n\r\nRédiger une documentation technique simple', 'Motivation, HTML/CSS, bases JavaScript, apprentissage rapide, travail en équipe, rigueur.', '6 mois'),
+(2, 'Stage Assistant Marketing', 3, 3, 27, 'Stage de 6 mois.', 1, 'Participer à la création de contenus (réseaux sociaux, newsletters, blogs), Aider à la gestion des campagnes marketing digitales, Réaliser des études de marché et analyses de concurrence, Mettre à jour le site web et les supports commerciauxSuivre les indicateurs de performance (KPI), Assister à l’organisation d’événements ou de promotions', 'Créativité, communication, réseaux sociaux, marketing digital, organisation, esprit d’équipe.', '3 à 5 mois.'),
+(3, 'Technicien Réseau', 2, 2, 35, 'Installation et maintenance.', 2, 'Installer et configurer les équipements réseau (routeurs, switches), Assurer la maintenance et le dépannage du réseau, Surveiller la sécurité et les performances réseau, Gérer les comptes utilisateurs et les accès, Documenter les incidents et interventions, Assister les utilisateurs en support technique.', 'Réseaux informatiques, maintenance, support technique, sécurité, organisation, réactivité.', 'Durée indéterminé '),
 (4, 'Alternance Développeur Mobile', 4, 4, 16, 'Développement d\'applications.', 2, 'Développer des applications mobiles (Android / iOS / Flutter / React Native), Implémenter des fonctionnalités front-end et back-end, Tester et corriger les anomalies, Participer à la conception technique de l’application, Optimiser l’expérience utilisateur (UX), Publier et maintenir les applications sur les stores.', 'Programmation mobile, Android/iOS, bases en code, curiosité, autonomie, travail en équipe.', '5 mois'),
-(5, 'Chef de Projet Digital', 2, 2, 9, 'Pilotage de projets digitaux.', 2, 'Piloter des projets web et digitaux de A à Z, Rédiger les cahiers des charges, Coordonner les équipes (développeurs, designers, marketing), Suivre les délais, budgets et livrables, Analyser les performances des projets, Assurer la relation client et le reporting.', 'Gestion de projet, organisation, coordination, communication, outils digitaux, leadership.', 'Durée indéterminé '),
+(5, 'Chef de Projet Digital', 2, 2, 9, 'Pilotage de projets digitaux.', 2, 'Pilotage de projets digitaux.', 'Gestion de projet, organisation, coordination, communication, outils digitaux, leadership.', 'Durée indéterminé '),
 (6, 'Stage Comptabilité', 3, 3, 30, 'Stage de 3 mois.', 2, 'Saisir et classer les pièces comptables, Participer à la gestion de la facturation, Aider aux rapprochements bancaires, Contribuer à la préparation des bilans, Mettre à jour les tableaux de suivi financier, Assister aux déclarations fiscales et sociales.', 'Saisie comptable, rigueur, organisation, bases comptables, confidentialité, chiffres.', '3 à 5 mois.');
 
 -- --------------------------------------------------------
@@ -85,12 +85,24 @@ CREATE TABLE `postulations` (
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Déchargement des données de la table `postulations`
+-- Structure de la table `roles`
 --
 
-INSERT INTO `postulations` (`Id`, `Id_user`, `Id_offre`, `status`) VALUES
-(1, 5, 3, 1);
+CREATE TABLE `roles` (
+  `Id` int(11) NOT NULL,
+  `Role` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `roles`
+--
+
+INSERT INTO `roles` (`Id`, `Role`) VALUES
+(1, 'Admin'),
+(2, 'Utilisateur');
 
 -- --------------------------------------------------------
 
@@ -143,22 +155,18 @@ CREATE TABLE `user` (
   `Nom` varchar(128) NOT NULL,
   `Prenom` varchar(128) NOT NULL,
   `Email` varchar(256) NOT NULL,
-  `Password` varchar(64) NOT NULL
+  `Password` varchar(64) NOT NULL,
+  `Id_role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`Id`, `Nom`, `Prenom`, `Email`, `Password`) VALUES
-(1, 'Toto10', 'Toto', 'toto.titi@exemple.com', 'azerty'),
-(2, 'abdallah', 'oumair', 'oumairabdallah@gmail.com', 'azerty'),
-(3, 'abdallah', 'oumair1', 'o.abdallah194@gmai.com', 'azerty'),
-(5, 'doudou', 'dada', 'doudoudada@gmail.com', 'azerty'),
-(11, 'Toto', 'Toto', 'oumairabdallah@gmail.com', 'azerty'),
-(12, 'Toto', 'Toto', 'oumairabdallah@gmail.com', 'azerty'),
-(13, 'Toto', 'Toto', 'oumairabdallah@gmail.com', 'azerty'),
-(14, 'Toto', 'Toto', 'oumairabdallah@gmail.com', 'azerty');
+INSERT INTO `user` (`Id`, `Nom`, `Prenom`, `Email`, `Password`, `Id_role`) VALUES
+(12, 'Lala', 'Bouba', 'boubalala@gmail.com', '$2y$10$e5rSM9eZ4yr79SUMtwEHfeDvEB8eob/CHoJRSavqph17THEHeQoZO', 2),
+(13, 'abdallah', 'oumair', 'oumairabdallah@gmail.com', '$2y$10$1UpIz/oJK8ikOexQsgvf3ehRYbPq72UMlDKD/TJXAF2Fo0cEjtsvW', 1),
+(14, 'dada', 'doudou', 'doudoudada@gmail.com', '$2y$10$4h6MtFyYc27kN2cFM0zPSeMWn2oojMmNd1F49tO01NrwWR4zk/tu2', 2);
 
 -- --------------------------------------------------------
 
@@ -267,6 +275,12 @@ ALTER TABLE `postulations`
   ADD KEY `postulation_offre` (`Id_offre`);
 
 --
+-- Index pour la table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Index pour la table `statuts`
 --
 ALTER TABLE `statuts`
@@ -282,7 +296,8 @@ ALTER TABLE `types_contrats`
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `User_role` (`Id_role`);
 
 --
 -- Index pour la table `villes`
@@ -304,13 +319,19 @@ ALTER TABLE `modes_travails`
 -- AUTO_INCREMENT pour la table `offres`
 --
 ALTER TABLE `offres`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `postulations`
 --
 ALTER TABLE `postulations`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT pour la table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `statuts`
@@ -328,7 +349,7 @@ ALTER TABLE `types_contrats`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `villes`
@@ -355,6 +376,12 @@ ALTER TABLE `offres`
 ALTER TABLE `postulations`
   ADD CONSTRAINT `Postulation_user` FOREIGN KEY (`Id_user`) REFERENCES `user` (`Id`),
   ADD CONSTRAINT `postulation_offre` FOREIGN KEY (`Id_offre`) REFERENCES `offres` (`Id`);
+
+--
+-- Contraintes pour la table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `User_role` FOREIGN KEY (`Id_role`) REFERENCES `roles` (`Id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
