@@ -59,4 +59,32 @@ ORDER BY st.Id asc';
 $selection_Offre=$mysqlClient->prepare($selectOffre);
 $selection_Offre->execute();
 $listeOffre=$selection_Offre->fetchAll();
+
+
+// evoi le formulair de contacte dans la basse de donné 
+
+
+
+function enregistrerContact($mysqlClient, $nom, $email, $sujet, $message) {
+    try {
+        $sql = "INSERT INTO contacts (nom, email, sujet, message)
+                VALUES (:nom, :email, :sujet, :message)";
+
+        $stmt = $mysqlClient->prepare($sql);
+
+        return $stmt->execute([
+            'nom' => $nom,
+            'email' => $email,
+            'sujet' => $sujet,
+            'message' => $message
+        ]);
+
+    } catch (Exception $e) {
+        return false;
+    }
+}
+
+
+
+
 ?>
