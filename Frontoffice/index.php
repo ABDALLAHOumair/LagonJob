@@ -90,7 +90,7 @@ require_once(__DIR__ . '/connexionBDD.php');
 </body>
 <footer class="site-footer footer-inner">
     <div>
-        <p>© 2025 LagonJob - Tous droits réservés</p>
+        <p>© 2025 LagonJob -  Tous droits réservés</p>
     </div>
     <nav class="nav">
         <div> 
