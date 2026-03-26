@@ -147,6 +147,21 @@ INSERT INTO `types_contrats` (`Id`, `Nom_type_contrat`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `Id` int(11) NOT NULL,
+  `nom` varchar(128) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `sujet` varchar(256) NOT NULL,
+  `message` longtext NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `user`
 --
 
@@ -275,6 +290,12 @@ ALTER TABLE `postulations`
   ADD KEY `postulation_offre` (`Id_offre`);
 
 --
+-- Index pour la table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Index pour la table `roles`
 --
 ALTER TABLE `roles`
@@ -326,6 +347,12 @@ ALTER TABLE `offres`
 --
 ALTER TABLE `postulations`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT pour la table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `roles`

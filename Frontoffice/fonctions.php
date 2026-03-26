@@ -63,10 +63,24 @@ $listeOffre=$selection_Offre->fetchAll();
 
 // evoi le formulair de contacte dans la basse de donné 
 
-
-
 function enregistrerContact($mysqlClient, $nom, $email, $sujet, $message) {
     try {
+        // Validation des données
+        if (empty($nom) || empty($email) || empty($sujet) || empty($message)) {
+            return false;
+        }
+
+        // Validation email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+
+        // Limitation de la longueur pour éviter les problèmes
+        $nom = substr(trim($nom), 0, 128);
+        $email = substr(trim($email), 0, 256);
+        $sujet = substr(trim($sujet), 0, 256);
+        $message = substr(trim($message), 0, 65535);
+
         $sql = "INSERT INTO contacts (nom, email, sujet, message)
                 VALUES (:nom, :email, :sujet, :message)";
 
