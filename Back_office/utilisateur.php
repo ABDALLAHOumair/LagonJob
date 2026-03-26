@@ -106,7 +106,6 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                             <td><?php echo $user['Nom'] ?></td>
                             <td><?php echo $user['Prenom'] ?></td>
                             <td><?php echo $user['Email'] ?></td>
-                            <td><?php echo $user['Password'] ?></td>
                             <td>
                                 <!-- Bouton Modifier -->
                                 <form action="modification_user.php" method="post" style="display:inline;">
@@ -114,7 +113,6 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                     <input type="hidden" name="nom" value="<?php echo $user['Nom']?>">
                                     <input type="hidden" name="prenom" value="<?php echo $user['Prenom']?>">
                                     <input type="hidden" name="email" value="<?php echo $user['Email']?>">
-                                    <input type="hidden" name="password" value="<?php echo $user['Password']?>">
                                     <button type="submit" class="btn">Modifier</button>
                                 </form> 
 
@@ -124,7 +122,6 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                     <input type="hidden" name="nom" value="<?php echo $user['Nom']?>">
                                     <input type="hidden" name="prenom" value="<?php echo $user['Prenom']?>">
                                     <input type="hidden" name="email" value="<?php echo $user['Email']?>">
-                                    <input type="hidden" name="password" value="<?php echo $user['Password']?>">
                                     <button type="submit" class="btn">Supprimer</button>
                                 </form>
                             </td>
