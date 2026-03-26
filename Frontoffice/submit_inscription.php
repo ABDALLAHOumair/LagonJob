@@ -3,47 +3,66 @@ session_start();
 require_once(__DIR__.'/connexionBDD.php');
 require_once(__DIR__.'/fonctions.php');
 
-
-if (isset($_GET['email']) 
-    && isset($_GET['nom']) 
-    && isset($_GET['prenom'])
-    && isset($_GET['password'])
-    && isset($_GET['confirmer'])
-    && !empty($_GET['email'])
-    && !empty($_GET['nom'])
-    && !empty($_GET['prenom'])
-    && !empty($_GET['password'])
-    && !empty($_GET['confirmer'])){
-        foreach ($listeUser as $user) {
-            if ($user['Email'] == $_GET['email']) {
+if (isset($_POST['email']) 
+    && isset($_POST['nom']) 
+    && isset($_POST['prenom'])
+    && isset($_POST['password'])
+    && isset($_POST['confirmer'])
+    && !empty($_POST['email'])
+    && !empty($_POST['nom'])
+    && !empty($_POST['prenom'])
+    && !empty($_POST['password'])
+    && !empty($_POST['confirmer'])){
+        $RequeteUserTargget='SELECT Email, Password FROM user WHERE Email =:Email';
+        $UserTargget=$mysqlClient->prepare($RequeteUserTargget);
+        $UserTargget->execute([
+            'Email' => $_POST['email'],
+        ]);
+        $User=$UserTargget->fetchAll();
+        if (count($User)>0) {    
+            if ($User[0]['Email'] == $_POST['email']) {
                 $_SESSION['Error_message_email'] =
                 "L'email saisie est déjà utilisé.";
-                redirectToUrl('inscription.php');
+                die(redirectToUrl('inscription.php'));
             }
-            elseif ($_GET['confirmer'] != $_GET['password']){
+            if ($_POST['confirmer'] != $_POST['password']){
                 $_SESSION['Error_message_mdp'] = 
                 "Les mots de passes ne sont pas identique.";
-                redirectToUrl('inscription.php');
+                die(redirectToUrl('inscription.php'));
             }
             else{
-                $insertUser='INSERT INTO user(Email, Password, Nom, Prenom) VALUE(:Email, :Password, :Nom, :Prenom)';
+                $insertUser='INSERT INTO user(Email, Password, Nom, Prenom, Id_role) VALUE(:Email, :Password, :Nom, :Prenom, :Role)';
                 $insertUser=$mysqlClient->prepare($insertUser);
                 $insertUser->execute([
-                    'Email' => $_GET['email'],
-                    'Password' => $_GET['password'],
-                    'Nom' => $_GET['nom'],
-                    'Prenom' => $_GET['prenom'],
+                    'Email' => $_POST['email'],
+                    'Password' =>password_hash($_POST['password'], PASSWORD_DEFAULT),
+                    'Nom' => $_POST['nom'],
+                    'Prenom' => $_POST['prenom'],
+                    'Role' => 2,
                 ]);
 
-                redirectToUrl('index.php');
+                die(redirectToUrl('index.php'));
             }
         }
+        else{
+            $insertUser='INSERT INTO user(Email, Password, Nom, Prenom, Id_role) VALUE(:Email, :Password, :Nom, :Prenom, :Role)';
+            $insertUser=$mysqlClient->prepare($insertUser);
+            $insertUser->execute([
+                'Email' => $_POST['email'],
+                'Password' =>password_hash($_POST['password'], PASSWORD_DEFAULT),
+                'Nom' => $_POST['nom'],
+                'Prenom' => $_POST['prenom'],
+                'Role' => 2,
+            ]);
 
-}
+            die(redirectToUrl('index.php'));
+        }
+    }
+
 else{
     $_SESSION['Error_message_inscription']=
     "Veuillez fournir toutes les informations d'inscription.";
-    redirectToUrl('inscription.php');
+    die(redirectToUrl('inscription.php'));
 }
 ?>
  

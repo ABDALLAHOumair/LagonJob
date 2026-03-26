@@ -84,7 +84,7 @@ session_start();
 
     <?php
     // Construction de la requête SQL avec filtres
-    $sql = "SELECT o.Id, o.Titre, o.Description, 
+    $sql = "SELECT o.Id, o.Titre, o.Description, o.Id_statut, 
             tc.Nom_type_contrat as type, 
             v.Nom_ville as ville, 
             mt.Nom_mode_travail as mode_travail
@@ -92,7 +92,8 @@ session_start();
             INNER JOIN types_contrats tc ON o.Id_type_contrat = tc.Id
             INNER JOIN villes v ON o.Id_ville = v.Id
             INNER JOIN modes_travails mt ON o.Id_mode_travail = mt.Id
-            WHERE 1=1";
+            WHERE o.Id_statut=2
+            ORDER BY o.Id desc";
     
     $params = [];
 
@@ -138,7 +139,7 @@ session_start();
                         
                         <!-- Formulaire avec ID caché -->
                         <form action="detailoffre.php" method="post" style="margin-top:10px;">
-                            <input type="hidden" name="id" value="<?php echo $offre['Id']; ?>">
+                            <input type="hidden" name="id_offre" value="<?php echo $offre['Id']; ?>">
                             <button type="submit" class="btn">Voir détails</button>
                         </form>
                     </div>

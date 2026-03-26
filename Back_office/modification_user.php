@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!$_SESSION['LOGGED_ADMIN']) {
+    header("Location: ../Frontoffice/connexion.php");
+exit;
+}
 require_once(__DIR__ . '/../Frontoffice/fonctions.php');
 require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 ?>
@@ -7,7 +12,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de bord</title>
+    <title>Modification Utilisateur</title>
     <link rel="stylesheet" href="../Frontoffice/style.css">
 </head>
 <body>
@@ -18,6 +23,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
             <a href="utilisateur.php">Utilisateurs</a>
             <a href="user.php">Offres</a>
             <a href="contact.php">Contact</a>
+            <button class="btn btn-outline" onclick="window.location.href='deconnexionBE.php'">Deconnexion</button>
         </nav>
     </header>
     <main class="container">
@@ -26,19 +32,19 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
             <button class="btn-retour" onclick="history.back()">
                 <span class="fleche"></span>
                 Retour
-            </button>  
+            </button>   
         </div>
         <form class="form" action="submit_modification_user.php" method="post">
             <div class="stack">
                 <div class="row">
                     <div>
                         <label for="nom">Nom</label>
-                            <input type="text" id="nom" name="nom" 
-                            value="<?php foreach ($listeUser as $user) {
-                                if ($user['Id'] == $_POST['id_user']) {
-                                    echo $user['Nom']; 
-                                }
-                            } ?>">
+                        <input type="text" id="nom" name="nom" 
+                        value="<?php foreach ($listeUser as $user) {
+                            if ($user['Id'] == $_POST['id_user']) {
+                                echo $user['Nom']; 
+                            }
+                        } ?>">
                     </div>
 
                     <div>
@@ -60,34 +66,36 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                                 }
                             } ?>">
                     </div>
-
                     <div>
-                        <label for="password">Mot de passe</label>
-                            <input type="text" id="password" name="password" 
-                            value="<?php foreach ($listeUser as $user) {
-                                if ($user['Id'] == $_POST['id_user']) {
-                                    echo $user['Password']; 
-                                }
-                            } ?>">
+                        <label for="role">Rôle</label>
+                        <select name="role" class="card">
+                           <?php for ($i=0; $i < count($listerole) ; $i++) {?> 
+                                <option value="<?php echo $listerole[$i]['Id']?>" 
+                                <?php if ($listerole[$i]['Role']==$_POST['role']){?>selected<?php }?>>
+                                    <?php echo $listerole[$i]['Role']?>
+                                </option>
+                            <?php } ?>
+                        </select>
                     </div>
-                <input type="hidden" name="id_user" value="<?php echo $_POST['id_user']?>">
-                <div class="actions">
+                </div>
+                <div class="">
+                    <input type="hidden" name="id_user" value="<?php echo $_POST['id_user']?>">
                     <button class="btn" type="submit">Modifier</button>
                 </div>
             </div>
 
         </form>
     </main>
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+            © 2025 LagonJobs - Tous droits réservés
+            </div>
+            <div>
+            <a href="">Confidentialité</a> &nbsp; | &nbsp;
+            <a href="contact.php">Nous contacter</a>
+            </div>
+        </div>
+    </footer>
 </body>
-<footer class="site-footer">
-    <div class="container footer-inner">
-        <div>
-        © 2025 LagonJobs - Tous droits réservés
-        </div>
-        <div>
-        <a href="">Confidentialité</a> &nbsp; | &nbsp;
-        <a href="contact.php">Nous contacter</a>
-        </div>
-    </div>
-</footer>
 </html>

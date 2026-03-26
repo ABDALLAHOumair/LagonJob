@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!$_SESSION['LOGGED_ADMIN']) {
+    header("Location: ../Frontoffice/connexion.php");
+exit;
+}
 require_once(__DIR__ . '/../Frontoffice/fonctions.php');
 ?>
 <!DOCTYPE html>
@@ -17,6 +22,7 @@ require_once(__DIR__ . '/../Frontoffice/fonctions.php');
             <a href="utilisateur.php">Utilisateurs</a>
             <a href="offre.php">Offres</a>
             <a href="contact.php">Contact</a>
+            <button class="btn btn-outline" onclick="window.location.href='deconnexionBE.php'">Deconnexion</button>
         </nav>
     </header>
     <?php

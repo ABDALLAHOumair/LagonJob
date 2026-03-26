@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!$_SESSION['LOGGED_ADMIN']) {
+    header("Location: ../Frontoffice/connexion.php");
+exit;
+}
 require_once(__DIR__ . '/../Frontoffice/fonctions.php');
 require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
 ?>
@@ -18,6 +23,7 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
             <a href="utilisateur.php">Utilisateurs</a>
             <a href="user.php">Offres</a>
             <a href="contact.php">Contact</a>
+            <button class="btn btn-outline" onclick="window.location.href='deconnexionBE.php'">Deconnexion</button>
         </nav>
     </header>
     <main class="container">
@@ -61,17 +67,17 @@ require_once(__DIR__ . '/../Frontoffice/connexionBDD.php');
                             } ?>" disabled>
                     </div>
 
-                    <div>
-                        <label for="password">Mot de passe</label>
-                            <input type="text" id="password" name="password" 
+                    <div> 
+                        <label for="role">Rôle</label>
+                            <input type="role" id="role" name="role" 
                             value="<?php foreach ($listeUser as $user) {
                                 if ($user['Id'] == $_POST['id_user']) {
-                                    echo $user['Password']; 
+                                    echo $user['Role']; 
                                 }
                             } ?>" disabled>
                     </div>
-                <input type="hidden" name="id_user" value="<?php echo $_POST['id_user']?>">
                 <div class="actions">
+                    <input type="hidden" name="id_user" value="<?php echo $_POST['id_user']?>">
                     <button class="btn" type="submit">Supprimer</button>
                 </div>
             </div>

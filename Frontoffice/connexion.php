@@ -7,7 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lagonjob</title>
+    <title>Connexion</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,16 +15,16 @@ session_start();
     <main class="hero">
         <div class="center">
             <h1>Connexion</h1>
-            <form action="submit_connexion.php" method="get" class="form auth-card">
+            <form action="submit_connexion.php" method="post" class="form auth-card">
                 <div class="stack">
                     <div>
                         <label for="email">Email</label>
-                        <input type="textarea" id="email" name="email">
+                        <input type="textarea" id="email" name="email" required>
                     </div>
                   
                     <div>
                         <label for="password">Mot de passe</label>
-                        <input type="Password" id="password" name="password">
+                        <input type="Password" id="password" name="password" required>
                     </div>
                     <?php 
                     if (isset($_SESSION['LOGIN_ERROR_MESSAGE'])){
@@ -46,15 +46,15 @@ session_start();
         </div>
     </main>
 </body>
-<footer class="site-footer footer-inner">
-    <div>
-        <p>© 2025 LagonJob - Tous droits réservés</p>
-    </div>
-    <nav class="nav">
-        <div> 
-            <a>Conditions</a>
-            <a href="contact.php">Nous contacter</a>
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <div>
+        © 2025 LagonJobs - Tous droits réservés
         </div>
-    </nav>
+        <div>
+        <a href="">Confidentialité</a> &nbsp; | &nbsp;
+        <a href="contact.php">Nous contacter</a>
+        </div>
+    </div>
 </footer>
 </html>

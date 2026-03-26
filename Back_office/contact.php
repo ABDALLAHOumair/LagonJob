@@ -1,9 +1,16 @@
+<?php
+session_start();
+if (!$_SESSION['LOGGED_ADMIN']) {
+    header("Location: ../Frontoffice/connexion.php");
+exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de bord</title>
+    <title>Contact</title>
     <link rel="stylesheet" href="../Frontoffice/style.css">
 </head>
 <body>
@@ -14,6 +21,7 @@
             <a href="utilisateur.php">Utilisateurs</a>
             <a href="offre.php">Offres</a>
             <a href="contact.php">Contact</a>
+            <button class="btn btn-outline" onclick="window.location.href='deconnexionBE.php'">Deconnexion</button>
         </nav>
     </header>
     <section class="section">

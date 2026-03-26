@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!$_SESSION['LOGGED_ADMIN']) {
+    header("Location: ../Frontoffice/connexion.php");
+exit;
+}
 require_once(__DIR__. "/../Frontoffice/connexionBDD.php");
 require_once(__DIR__. "/../Frontoffice/fonctions.php");
 ?>
@@ -7,7 +12,7 @@ require_once(__DIR__. "/../Frontoffice/fonctions.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de bord</title>
+    <title>Ajout Offre</title>
     <link rel="stylesheet" href="../Frontoffice/style.css">
 </head>
 <body>
