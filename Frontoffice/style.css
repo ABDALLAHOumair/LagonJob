@@ -48,9 +48,16 @@ a:hover{color:var(--lagon)}
   background:#fff; box-shadow:var(--shadow);
 }
 .header-inner{display:flex; align-items:center; justify-content:space-between; padding:.8rem 0}
-.logo{font-weight:800; font-size:1.3rem; color:var(--text)}
-.logo span{color:var(--lagon-dark)}
-.logo .wave{margin-right:.35rem}
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
 .nav{display:flex; gap:.9rem; align-items:center}
 .nav a{font-weight:600}
 .nav .btn, .nav .btn-outline{margin-left:.2rem}

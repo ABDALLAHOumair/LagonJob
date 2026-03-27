@@ -15,7 +15,7 @@ exit;
 </head>
 <body>
     <header class="site-header header-inner">
-    <h1><a href="index.php">Lagonjob</a></h1>
+    <a class="logo" href="index.php"><img src="../Logo/logo.png" alt="logo_lagonjob"></a>
     <nav class="nav">
         <a href="index.php">Accuiel</a>
         <a href="utilisateur.php">Utilisateurs</a>
