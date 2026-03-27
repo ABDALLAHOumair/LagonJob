@@ -2,6 +2,16 @@
 session_start();
 require_once(__DIR__ . '/fonctions.php');
 require_once(__DIR__ . '/connexionBDD.php');
+$selectOffre='SELECT of.Id, of.Titre, of.Description, tc.Nom_type_contrat, mt.Nom_mode_travail, of.Id_type_contrat, of.Id_statut,vl.Nom_ville, st.Statut, of.Mission, of.Profile, of.Duree FROM offres of
+JOIN types_contrats tc ON of.Id_type_contrat = tc.Id
+JOIN modes_travails mt ON of.Id_mode_travail = mt.Id
+JOIN statuts st ON of.Id_statut = st.Id
+JOIN villes vl ON of.Id_ville = vl.Id
+WHERE of.Id_statut=2
+ORDER BY of.Id desc';
+$selection_Offre=$mysqlClient->prepare($selectOffre);
+$selection_Offre->execute();
+$listeOffre_FO=$selection_Offre->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,12 +82,12 @@ require_once(__DIR__ . '/connexionBDD.php');
                     <?php for ($i=0; $i <4 ; $i++) { ?> 
                         <div class="">
                             <article class="card">
-                                <span class="badge"><?php echo $listeOffre[$i]['Nom_type_contrat']?></span><br>
-                                <h2><?php echo $listeOffre[$i]['Titre'] ?></h2><br>
-                                <p><?php echo $listeOffre[$i]['Nom_ville'].' - '. $listeOffre[$i]['Nom_mode_travail'] ?></p><br>
-                                <p><?php echo $listeOffre[$i]['Description'] ?></p><br>
+                                <span class="badge"><?php echo $listeOffre_FO[$i]['Nom_type_contrat']?></span><br>
+                                <h2><?php echo $listeOffre_FO[$i]['Titre'] ?></h2><br>
+                                <p><?php echo $listeOffre_FO[$i]['Nom_ville'].' - '. $listeOffre[$i]['Nom_mode_travail'] ?></p><br>
+                                <p><?php echo $listeOffre_FO[$i]['Description'] ?></p><br>
                                 <form action="detailoffre.php" method="post">
-                                    <input type="hidden" name="id_offre" value="<?php echo $listeOffre[$i]['Id']?>">
+                                    <input type="hidden" name="id_offre" value="<?php echo $listeOffre_FO[$i]['Id']?>">
                                     <button type="submit" class="btn">voir</button>
                                 </form> 
                             </article>

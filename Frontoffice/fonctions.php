@@ -55,8 +55,7 @@ JOIN types_contrats tc ON of.Id_type_contrat = tc.Id
 JOIN modes_travails mt ON of.Id_mode_travail = mt.Id
 JOIN statuts st ON of.Id_statut = st.Id
 JOIN villes vl ON of.Id_ville = vl.Id
-WHERE of.Id_statut=2
-ORDER BY of.Id desc';
+ORDER BY st.Id asc';
 $selection_Offre=$mysqlClient->prepare($selectOffre);
 $selection_Offre->execute();
 $listeOffre=$selection_Offre->fetchAll();
