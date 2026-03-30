@@ -15,7 +15,7 @@ session_start();
     <?php
     // Connexion à la base de données
     $host = 'localhost';
-    $dbname = 'lagonjob';
+    $dbname = 'lagonjon';
     $username = 'root';
     $password = '';
 
