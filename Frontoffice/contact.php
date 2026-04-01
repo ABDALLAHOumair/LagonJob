@@ -140,19 +140,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             </form>
 
-            <script>
-                // Compteur de caractères pour le message
-                const messageTextarea = document.getElementById('message');
-                const messageCounter = document.getElementById('message-counter');
-                
-                function updateCounter() {
-                const length = messageTextarea.value.length;
-                messageCounter.textContent = length + ' / 65535 caractères';
-                }
-                
-                messageTextarea.addEventListener('input', updateCounter);
-                messageTextarea.addEventListener('change', updateCounter);
-            </script>
             </div>
         </section>
     </main>
