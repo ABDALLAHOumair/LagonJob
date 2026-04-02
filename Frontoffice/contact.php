@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="actions">
                 <button class="btn" type="submit">Envoyer</button>
                 <button class="btn btn-outline" type="reset">Effacer</button>
-                </div>
+                <button class="btn btn-outline" type="button" onclick="window.location.href='besion_aide.php'" style="margin-left: 900px;">Demande d'aide</button>                </div>
 
             </form>
 

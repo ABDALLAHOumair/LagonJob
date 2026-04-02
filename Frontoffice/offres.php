@@ -1,5 +1,7 @@
-<?php 
+<?php
 session_start();
+require_once(__DIR__ . "/connexionBDD.php");
+require_once(__DIR__ . "/fonctions.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,7 +17,7 @@ session_start();
     <?php
     // Connexion à la base de données
     $host = 'localhost';
-    $dbname = 'lagonjon';
+    $dbname = 'lagonjob';
     $username = 'root';
     $password = '';
 
@@ -99,8 +101,8 @@ session_start();
 
     // Ajout des filtres
     if (!empty($_POST['mots_cles'])) {
-        $sql .= " AND (o.Titre LIKE :mots_cles OR o.Description LIKE :mots_cles)";
-        $params[':mots_cles'] = '%' . $_POST['mots_cles'] . '%';
+       $sql .= " AND o.Titre LIKE :motscles OR o.Description LIKE :motscles";
+        $params[':motscles'] = '%' . $_POST['mots_cles'] . '%';
     }
 
     if (!empty($_POST['type'])) {

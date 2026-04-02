@@ -97,8 +97,3 @@ function enregistrerContact($mysqlClient, $nom, $email, $sujet, $message) {
         return false;
     }
 }
-
-
-
-
-?>
