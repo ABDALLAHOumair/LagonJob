@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 24 mars 2026 à 16:30
+-- Généré le : mer. 01 avr. 2026 à 09:39
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -20,6 +20,36 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `lagonjob`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `besion_aide`
+--
+
+CREATE TABLE `besion_aide` (
+  `Id` int(11) NOT NULL,
+  `Nom` varchar(20) NOT NULL,
+  `Prenom` varchar(20) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `telephone` int(11) NOT NULL,
+  `description` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `Id` int(11) NOT NULL,
+  `nom` varchar(128) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `sujet` varchar(256) NOT NULL,
+  `message` longtext NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -85,6 +115,13 @@ CREATE TABLE `postulations` (
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `postulations`
+--
+
+INSERT INTO `postulations` (`Id`, `Id_user`, `Id_offre`, `status`) VALUES
+(24, 16, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -147,21 +184,6 @@ INSERT INTO `types_contrats` (`Id`, `Nom_type_contrat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `contacts`
---
-
-CREATE TABLE `contacts` (
-  `Id` int(11) NOT NULL,
-  `nom` varchar(128) NOT NULL,
-  `email` varchar(256) NOT NULL,
-  `sujet` varchar(256) NOT NULL,
-  `message` longtext NOT NULL,
-  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `user`
 --
 
@@ -180,8 +202,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`Id`, `Nom`, `Prenom`, `Email`, `Password`, `Id_role`) VALUES
 (12, 'Lala', 'Bouba', 'boubalala@gmail.com', '$2y$10$e5rSM9eZ4yr79SUMtwEHfeDvEB8eob/CHoJRSavqph17THEHeQoZO', 2),
-(13, 'abdallah', 'oumair', 'oumairabdallah@gmail.com', '$2y$10$1UpIz/oJK8ikOexQsgvf3ehRYbPq72UMlDKD/TJXAF2Fo0cEjtsvW', 1),
-(14, 'dada', 'doudou', 'doudoudada@gmail.com', '$2y$10$4h6MtFyYc27kN2cFM0zPSeMWn2oojMmNd1F49tO01NrwWR4zk/tu2', 2);
+(14, 'dada', 'doudou', 'doudoudada@gmail.com', '$2y$10$4h6MtFyYc27kN2cFM0zPSeMWn2oojMmNd1F49tO01NrwWR4zk/tu2', 2),
+(16, 'toi', 'moi', 'moitoi@gmail.com', '$2y$10$oW5UcrF4UfVrRhuo/AS4QOR1qJ6VXu9ApbdYKsLtZWIGVRW7qxeSe', 1);
 
 -- --------------------------------------------------------
 
@@ -266,6 +288,18 @@ INSERT INTO `villes` (`Id`, `Nom_ville`) VALUES
 --
 
 --
+-- Index pour la table `besion_aide`
+--
+ALTER TABLE `besion_aide`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Index pour la table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Index pour la table `modes_travails`
 --
 ALTER TABLE `modes_travails`
@@ -288,12 +322,6 @@ ALTER TABLE `postulations`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `Postulation_user` (`Id_user`),
   ADD KEY `postulation_offre` (`Id_offre`);
-
---
--- Index pour la table `contacts`
---
-ALTER TABLE `contacts`
-  ADD PRIMARY KEY (`Id`);
 
 --
 -- Index pour la table `roles`
@@ -331,6 +359,18 @@ ALTER TABLE `villes`
 --
 
 --
+-- AUTO_INCREMENT pour la table `besion_aide`
+--
+ALTER TABLE `besion_aide`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `modes_travails`
 --
 ALTER TABLE `modes_travails`
@@ -346,13 +386,7 @@ ALTER TABLE `offres`
 -- AUTO_INCREMENT pour la table `postulations`
 --
 ALTER TABLE `postulations`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT pour la table `contacts`
---
-ALTER TABLE `contacts`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `roles`
@@ -376,7 +410,7 @@ ALTER TABLE `types_contrats`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `villes`
