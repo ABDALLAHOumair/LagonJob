@@ -21,27 +21,27 @@ require_once(__DIR__. "/connexionBDD.php")
                     <div class="row">
                         <div>
                             <label for="prenom">Prénom</label>
-                            <input type="textarea" id="prenom" name="prenom">
+                            <input type="textarea" id="prenom" name="prenom" required>
                         </div>
                         <div> 
                             <label for="nom">Nom</label>
-                            <input type="textarea" id="nom" name="nom">
+                            <input type="textarea" id="nom" name="nom" required>
                         </div>
                     </div>
 
                     <div>
                         <label for="email">Email</label>
-                        <input type="textarea" id="email" name="email">
+                        <input type="email" id="email" name="email" required>
                     </div>
                     
                     <div class="row">
                         <div>
                             <label for="password">Mot de passe</label>
-                            <input type="password" id="password" name="password">
+                            <input type="password" id="password" name="password" required>
                         </div>
                         <div> 
                             <label for="confirmer">Confirmer</label>
-                            <input type="password" id="confirmer" name="confirmer">
+                            <input type="password" id="confirmer" name="confirmer" required>
                         </div>
                     </div>
                     <?php 

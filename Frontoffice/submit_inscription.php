@@ -13,22 +13,41 @@ if (isset($_POST['email'])
     && !empty($_POST['prenom'])
     && !empty($_POST['password'])
     && !empty($_POST['confirmer'])){
-        $RequeteUserTargget='SELECT Email, Password FROM user WHERE Email =:Email';
-        $UserTargget=$mysqlClient->prepare($RequeteUserTargget);
-        $UserTargget->execute([
-            'Email' => $_POST['email'],
-        ]);
-        $User=$UserTargget->fetchAll();
-        if (count($User)>0) {    
-            if ($User[0]['Email'] == $_POST['email']) {
-                $_SESSION['Error_message_email'] =
-                "L'email saisie est déjà utilisé.";
-                die(redirectToUrl('inscription.php'));
-            }
-            if ($_POST['confirmer'] != $_POST['password']){
-                $_SESSION['Error_message_mdp'] = 
-                "Les mots de passes ne sont pas identique.";
-                die(redirectToUrl('inscription.php'));
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['Error_message_email'] = 'Il vous faut un email valide.';
+            die(redirectToUrl('inscription.php'));
+        }
+        else {
+            $RequeteUserTargget='SELECT Email, Password FROM user WHERE Email =:Email';
+            $UserTargget=$mysqlClient->prepare($RequeteUserTargget);
+            $UserTargget->execute([
+                'Email' => $_POST['email'],
+            ]);
+            $User=$UserTargget->fetchAll();
+            if (count($User)>0) {    
+                if ($User[0]['Email'] == $_POST['email']) {
+                    $_SESSION['Error_message_email'] =
+                    "L'email saisie est déjà utilisé.";
+                    die(redirectToUrl('inscription.php'));
+                }
+                if ($_POST['confirmer'] != $_POST['password']){
+                    $_SESSION['Error_message_mdp'] = 
+                    "Les mots de passes ne sont pas identique.";
+                    die(redirectToUrl('inscription.php'));
+                }
+                else{
+                    $insertUser='INSERT INTO user(Email, Password, Nom, Prenom, Id_role) VALUE(:Email, :Password, :Nom, :Prenom, :Role)';
+                    $insertUser=$mysqlClient->prepare($insertUser);
+                    $insertUser->execute([
+                        'Email' => $_POST['email'],
+                        'Password' =>password_hash($_POST['password'], PASSWORD_DEFAULT),
+                        'Nom' => $_POST['nom'],
+                        'Prenom' => $_POST['prenom'],
+                        'Role' => 2,
+                    ]);
+
+                    die(redirectToUrl('index.php'));
+                }
             }
             else{
                 $insertUser='INSERT INTO user(Email, Password, Nom, Prenom, Id_role) VALUE(:Email, :Password, :Nom, :Prenom, :Role)';
@@ -44,19 +63,7 @@ if (isset($_POST['email'])
                 die(redirectToUrl('index.php'));
             }
         }
-        else{
-            $insertUser='INSERT INTO user(Email, Password, Nom, Prenom, Id_role) VALUE(:Email, :Password, :Nom, :Prenom, :Role)';
-            $insertUser=$mysqlClient->prepare($insertUser);
-            $insertUser->execute([
-                'Email' => $_POST['email'],
-                'Password' =>password_hash($_POST['password'], PASSWORD_DEFAULT),
-                'Nom' => $_POST['nom'],
-                'Prenom' => $_POST['prenom'],
-                'Role' => 2,
-            ]);
-
-            die(redirectToUrl('index.php'));
-        }
+ 
     }
 
 else{
