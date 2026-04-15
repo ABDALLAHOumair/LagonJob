@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 01 avr. 2026 à 09:39
+-- Généré le : mer. 15 avr. 2026 à 10:43
 -- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Version de PHP : 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,21 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `lagonjob`
 --
-
--- --------------------------------------------------------
-
---
--- Structure de la table `besion_aide`
---
-
-CREATE TABLE `besion_aide` (
-  `Id` int(11) NOT NULL,
-  `Nom` varchar(20) NOT NULL,
-  `Prenom` varchar(20) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `telephone` int(11) NOT NULL,
-  `description` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -114,13 +99,6 @@ CREATE TABLE `postulations` (
   `Id_offre` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `postulations`
---
-
-INSERT INTO `postulations` (`Id`, `Id_user`, `Id_offre`, `status`) VALUES
-(24, 16, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -202,8 +180,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`Id`, `Nom`, `Prenom`, `Email`, `Password`, `Id_role`) VALUES
 (12, 'Lala', 'Bouba', 'boubalala@gmail.com', '$2y$10$e5rSM9eZ4yr79SUMtwEHfeDvEB8eob/CHoJRSavqph17THEHeQoZO', 2),
+(13, 'abdallah', 'oumair', 'oumairabdallah@gmail.com', '$2y$10$1UpIz/oJK8ikOexQsgvf3ehRYbPq72UMlDKD/TJXAF2Fo0cEjtsvW', 1),
 (14, 'dada', 'doudou', 'doudoudada@gmail.com', '$2y$10$4h6MtFyYc27kN2cFM0zPSeMWn2oojMmNd1F49tO01NrwWR4zk/tu2', 2),
-(16, 'toi', 'moi', 'moitoi@gmail.com', '$2y$10$oW5UcrF4UfVrRhuo/AS4QOR1qJ6VXu9ApbdYKsLtZWIGVRW7qxeSe', 1);
+(16, 'admin', 'admin', 'admin@gmail.com', '$2y$10$YxJI6jBcB50Qu6U4e2tfhuvLeMNxNSazMgutmkIcIzPyykYtlcosi', 1),
+(17, 'inviter', 'inviter', 'inviter@gmail.com', '$2y$10$i7lnVnhpDg1yhIckBKhVSe2Kc1gNfJMwnsfF/3uzf8g3OsVlNgY6G', 2);
 
 -- --------------------------------------------------------
 
@@ -288,12 +268,6 @@ INSERT INTO `villes` (`Id`, `Nom_ville`) VALUES
 --
 
 --
--- Index pour la table `besion_aide`
---
-ALTER TABLE `besion_aide`
-  ADD PRIMARY KEY (`Id`);
-
---
 -- Index pour la table `contacts`
 --
 ALTER TABLE `contacts`
@@ -359,12 +333,6 @@ ALTER TABLE `villes`
 --
 
 --
--- AUTO_INCREMENT pour la table `besion_aide`
---
-ALTER TABLE `besion_aide`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT pour la table `contacts`
 --
 ALTER TABLE `contacts`
@@ -386,7 +354,7 @@ ALTER TABLE `offres`
 -- AUTO_INCREMENT pour la table `postulations`
 --
 ALTER TABLE `postulations`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `roles`
@@ -410,7 +378,7 @@ ALTER TABLE `types_contrats`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `villes`
