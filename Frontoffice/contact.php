@@ -3,64 +3,41 @@ session_start();
 require_once(__DIR__ . "/connexionBDD.php");
 require_once(__DIR__ . "/fonctions.php");
 
+// Si le formulaire est envoyé
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Valider les données
-    $nom = isset($_POST['nom']) ? trim($_POST['nom']) : '';
-    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
-    $sujet = isset($_POST['sujet']) ? trim($_POST['sujet']) : '';
-    $message = isset($_POST['message']) ? trim($_POST['message']) : '';
 
-    // Erreurs de validation
+    // Récupération des champs
+    $nom = trim($_POST['nom']);
+    $email = trim($_POST['email']);
+    $sujet = trim($_POST['sujet']);
+    $message = trim($_POST['message']);
+
+    // Tableau d'erreurs
     $errors = [];
-    
-    if (empty($nom)) {
-        $errors[] = "Le nom est requis.";
-    } elseif (strlen($nom) > 128) {
-        $errors[] = "Le nom ne peut pas dépasser 128 caractères.";
-    }
 
-    if (empty($email)) {
-        $errors[] = "L'email est requis.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "L'email n'est pas valide.";
-    }
+    // Vérifications simples
+    if (empty($nom)) $errors[] = "Le nom est requis.";
+    if (empty($email)) $errors[] = "L'email est requis.";
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Email invalide.";
+    if (empty($sujet)) $errors[] = "Le sujet est requis.";
+    if (empty($message)) $errors[] = "Le message est requis.";
 
-    if (empty($sujet)) {
-        $errors[] = "Le sujet est requis.";
-    } elseif (strlen($sujet) > 256) {
-        $errors[] = "Le sujet ne peut pas dépasser 256 caractères.";
-    }
-
-    if (empty($message)) {
-        $errors[] = "Le message est requis.";
-    } elseif (strlen($message) > 65535) {
-        $errors[] = "Le message est trop long.";
-    } elseif (strlen($message) < 10) {
-        $errors[] = "Le message doit contenir au moins 10 caractères.";
-    }
-
+    // Si aucune erreur → insertion
     if (empty($errors)) {
-        $success = enregistrerContact(
-            $mysqlClient,
-            $nom,
-            $email,
-            $sujet,
-            $message
-        );
+        $success = enregistrerContact($mysqlClient, $nom, $email, $sujet, $message);
 
         if ($success) {
-            $_SESSION['success_contact'] = "Message envoyé avec succès ! Merci de nous avoir contacté.";
+            $_SESSION['success_contact'] = "Message envoyé avec succès.";
         } else {
-            $_SESSION['error_contact'] = "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.";
+            $_SESSION['error_contact'] = "Erreur lors de l'envoi du message.";
         }
     } else {
-        $_SESSION['error_contact'] = implode("\n", $errors);
+        $_SESSION['error_contact'] = implode("<br>", $errors);
     }
 
     header("Location: contact.php");
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -106,39 +83,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
             ?>
 
-            <form class="form" action="" method="POST">
-
+             <form class="form" action="" method="POST">
                 <div class="row">
                 <div>
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom" name="nom" maxlength="128" placeholder="Votre nom complet" required>
+                 <label for="nom">Nom</label>
+                 <input type="text" id="nom" name="nom" required>
                 </div>
 
-                <div>
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" maxlength="256" placeholder="votre@email.com" required>
-                </div>
-                </div>
+                 <div>
+                 <label for="email">Email</label>
+                 <input type="email" id="email" name="email" required>
+                 </div>
+                 </div>
 
                 <div class="stack">
-                <div>
-                    <label for="sujet">Sujet</label>
-                    <input type="text" id="sujet" name="sujet" maxlength="256" placeholder="Sujet de votre message" required>
-                </div>
+                 <div> 
+                 <label for="sujet">Sujet</label>
+                  <input type="text" id="sujet" name="sujet" required>
+                  </div>
 
-                <div>
+                  <div>
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" minlength="10" maxlength="65535" placeholder="Décrivez votre demande ici..." required style="min-height: 150px; resize: vertical;"></textarea>
-                    <small id="message-counter" style="display: block; color: #666; margin-top: 5px;">0 / 65535 caractères</small>
-                </div>
+                   <textarea id="message" name="message" required></textarea>
+                  </div>
                 </div>
 
-                <div class="actions">
-                <button class="btn" type="submit">Envoyer</button>
-                <button class="btn btn-outline" type="reset">Effacer</button>
-                <button class="btn btn-outline" type="button" onclick="window.location.href='besion_aide.php'" style="margin-left: 900px;">Demande d'aide</button>                </div>
+                    <div class="actions">
+                    <button class="btn" type="submit">Envoyer</button>
+                    <button class="btn btn-outline" type="reset">Effacer</button>
+                </div>
 
-            </form>
+             </form>
 
             </div>
         </section>
